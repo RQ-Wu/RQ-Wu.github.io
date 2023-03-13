@@ -72,6 +72,42 @@
             ( * denotes contribution equally )
           </font>
           <p></p>
+          <!-- ======================EORNet================================= -->
+          <tr  style="border: 2px dotted black;", onmouseout="eor_stop()" onmouseover="eor_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle;border-bottom: 2px dashed black;">
+              <div class="one">
+                <div class="two" id='eor_images'>
+                  <img src='images/EORNet/ours.jpg' width="320", height="160"></div>
+                <img src='images/EORNet/before.jpg' width="320", height="160">
+              </div>
+              </div>
+              <script type="text/javascript">
+                function eor_start() {
+                  document.getElementById('eor_images').style.opacity = "1";
+                }
+
+                function eor_stop() {
+                  document.getElementById('eor_images').style.opacity = "0";
+                }
+                panorr_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:top;border-bottom: 2px dashed black;">
+                <papertitle>Towards Extremely Overexposed Image Restoration</papertitle>
+              </a>
+              <p style="margin: -8px;"></p>
+              <br>
+              Zheng-Peng Duan, Xin Jin, <strong>Rui-Qi Wu</strong>, Chun-Le Guo, Li Liu, Chong-Yi Li
+              <br>
+              Submmit to <em>ICCV </em>, 2023
+              <br>
+              <p style="margin: 8px;"></p>
+              PDF &nbsp|&nbsp Code
+              <p></p>
+            </td>
+          </tr>
+          <!-- ================================================================= -->
+
           <!-- ======================RIDCP================================= -->
           <tr  style="border: 2px dotted black;", onmouseout="panorr_stop()" onmouseover="panorr_start()">
             <td style="padding:20px;width:25%;vertical-align:middle;border-bottom: 2px dashed black;">
