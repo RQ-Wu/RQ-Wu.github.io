@@ -73,8 +73,8 @@
           </font>
           <p></p>
           <!-- ======================EORNet================================= -->
-          <tr  style="border: 2px dotted black;", onmouseout="eor_stop()" onmouseover="eor_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle;border-bottom: 2px dashed black;">
+          <tr  style="border: 2px dotted black;">
+            <td style="padding:20px;width:25%;vertical-align:middle;border-bottom: 2px dashed black;" onmouseout="eor_stop()" onmouseover="eor_start()">
               <div class="one">
                 <div class="two" id='eor_images'>
                   <img src='images/EORNet/ours.jpg' width="320", height="160"></div>
@@ -82,14 +82,13 @@
               </div>
               </div>
               <script type="text/javascript">
-                function eor_start() {
-                  document.getElementById('eor_images').style.opacity = "1";
-                }
-
                 function eor_stop() {
                   document.getElementById('eor_images').style.opacity = "0";
                 }
-                panorr_stop()
+                eor_stop()
+                function eor_start() {
+                  document.getElementById('eor_images').style.opacity = "1";
+                }
               </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:top;border-bottom: 2px dashed black;">
@@ -182,16 +181,6 @@
             <td style="padding:20px;width:25%;vertical-align:middle;border-bottom: 2px dashed black;">
                 <img src='images/StereoSuperpixel/extension.png' width="320" height="160">
               </div>
-              <script type="text/javascript">
-                function panorr_start() {
-                  document.getElementById('pano_image').style.opacity = "1";
-                }
-
-                function panorr_stop() {
-                  document.getElementById('pano_image').style.opacity = "0";
-                }
-                panorr_stop()
-              </script>
             </td>
             <td style="padding:20px;width:75%;vertical-align:top;border-bottom: 2px dashed black;">
                 <papertitle>Stereo Superpixel Segmentation Via Decoupled Dynamic Spatial-Embedding Fusion Network</papertitle>
