@@ -1,0 +1,71 @@
+body{
+    margin: 0;
+    border: 0;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: 'Google Sans', sans-serif;
+}
+
+a {
+    color: #1772d0;
+    text-decoration: none;
+}
+  
+a:focus,
+a:hover {
+color: #f09228;
+text-decoration: none;
+}
+
+name {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    color: #363636;
+}
+
+#author-list{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #1772d0;
+}
+
+#institution-list{
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+#button-list{
+    margin: 20px 0 20px 0;
+}
+
+.link-button{
+    border-radius: 290486px;
+    padding-left: calc(1em + 0.25em);
+    padding-right: calc(1em + 0.25em);
+    background-color: #363636;
+    border-color: transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #fff;
+    margin: 0 5px 0 5px;
+}
+
+.link-button-content{
+    color: white;
+}
+
+svg:not(:root).svg-inline--fa{
+    overflow: visible;
+}
+
+.svg-inline--fa.fa-w-12 {
+    width: 0.75em;
+}
