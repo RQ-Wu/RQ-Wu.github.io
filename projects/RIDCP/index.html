@@ -27,6 +27,9 @@
                 <sup>2</sup>Hisilicon Technologies Co. Ltd.&nbsp;&nbsp;&nbsp;<br>
                 <sup>3</sup>S-Lab, Nanyang Technological University&nbsp;&nbsp;&nbsp;
             </div>
+            <p id="publication">
+                CVPR 2023
+            </p>
             <div id="button-list">
                 <span class="link-button">
                     <a class="link-button-content">
@@ -63,7 +66,8 @@
             </div>
         </div>
         <div style="background-color: rgb(248, 248, 248);">
-            <div style="width: 1020px;order:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <div style="width: 1020px;order:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;text-align: center;padding-top: 10px;">
+                <h1 class="section-name">Powerful Dehazing Ability on Real Images</h1>
                 <table>
                     <tbody>
                         <tr>
@@ -81,7 +85,53 @@
                         </tr>
                     </tbody>
                 </table>
+                <h1 class="section-name">Controllable Dehazing</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="width: 480px;text-align: left; padding-bottom: 5px;">
+                                <img id='origin_img' class='control-display' src='results_adjust/pumpkins_input.png' />
+                            </td>
+                            <td style="width: 485px; text-align: right; padding-bottom: 5px;">
+                                <img id='img' class='control-display' src='results_adjust/pumpkins_input_-20.0.png' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 0px;">
+                                Input Hazy Image
+                            </td>
+                            <td style="padding-top: 0;">
+                                Controllable Output
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input id='slider' type="range" min="0" max="240" value="160" step="1" />
             </div>
         </div>
     </div>
 </body>
+
+<script>
+    var img = document.getElementById('img');
+    var sliderbar = document.getElementById('slider');
+    slider.addEventListener('input', setImage);
+    var img_array = ['results_adjust/pumpkins_input_60.0.png',
+                      'results_adjust/pumpkins_input_50.0.png',
+                      'results_adjust/pumpkins_input_40.0.png',
+                      'results_adjust/pumpkins_input_30.0.png',
+                      'results_adjust/pumpkins_input_10.0.png',
+                      'results_adjust/pumpkins_input_20.0.png',
+                      'results_adjust/pumpkins_input_0.0.png',
+                      'results_adjust/pumpkins_input_-10.0.png',
+                      'results_adjust/pumpkins_input_-20.0.png',
+                      'results_adjust/pumpkins_input_-30.0.png',
+                      'results_adjust/pumpkins_input_-40.0.png',
+                      'results_adjust/pumpkins_input_-50.0.png',
+                      'results_adjust/pumpkins_input_-60.0.png',];
+    function setImage(e)
+    {
+        var {value, max} = e.target;
+        img.src = img_array[parseInt(value/20)];
+    }
+</script>
