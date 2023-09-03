@@ -63,6 +63,18 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+body,
+td,
+th,
+tr,
+p,
+a {
+  color: rgb(45, 45, 65);
+  font-weight: 550;
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 13px
+}
+
 a {
   color: #1772d0;
   text-decoration: none;
@@ -72,16 +84,6 @@ a:focus,
 a:hover {
   color: #f09228;
   text-decoration: none;
-}
-
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 16px
 }
 
 i {
@@ -99,35 +101,34 @@ li{
 
 strong {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 heading {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 papertitle {
   font-family: Comic Sans MS;
-  font-size: 17px;
+  font-size: 13px;
   color:#0d30ca;
   font-weight: 530
 }
 
 name {
   font-family: Comic Sans MS, Verdana, Helvetica, sans-serif;
-  font-size: 32px;
+  font-weight: 500;
+  font-size: 25px;
 }
 
 .one {
-  width: 160px;
-  height: 160px;
   position: relative;
+  padding-bottom: 10px;
 }
 
 .two {
-  width: 160px;
-  height: 160px;
+  padding-bottom: 10px;
   position: absolute;
   transition: opacity .2s ease-in-out;
   -moz-transition: opacity .2s ease-in-out;
