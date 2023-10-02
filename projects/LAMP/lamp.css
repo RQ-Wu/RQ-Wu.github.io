@@ -171,6 +171,11 @@ svg:not(:root).svg-inline--fa{
     scroll-behavior: smooth;
 }
 
+.circle-breath:hover{
+    animation: donghua 0.4s infinite;
+
+}
+
 @keyframes donghua {
     0% {
         transform: scale(0.60);
