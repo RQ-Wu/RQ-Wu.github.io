@@ -9,6 +9,7 @@ img{
     display: block;
 }
 
+body,
 td,
 th,
 tr,
@@ -97,4 +98,59 @@ svg:not(:root).svg-inline--fa{
 
 .svg-inline--fa.fa-w-12 {
     width: 0.75em;
+}
+
+.root-content{
+    text-align: center;
+    width: 1020px;
+    margin-right: auto;
+    margin-left: auto;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+.section-name{
+    color: #4a4a4a;
+    font-size: 35px;
+}
+
+.section-content-text{
+    font-family: 'Noto Sans', sans-serif;
+    text-align: justify;
+    font-size: 17px;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+}
+
+.section-content{
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-row img{
+    width: 85%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.result-row td{
+    border: 10px;
+}
+
+.prompt-row{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.bibtex{
+    text-align: left;
+    font-size: 16px;
+    font-family: monospace;
+    background-color: #e1e1e1;
+    overflow-x: auto;
+    padding: 5px 15px 15px 15px;
 }
