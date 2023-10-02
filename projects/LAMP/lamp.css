@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 img{
@@ -71,7 +72,7 @@ a {
 #button-list{
     margin: 20px auto 80px auto;
     position: absolute;
-    bottom: 10%;
+    bottom: 20%;
     left: 0;
     right: 0;
 }
@@ -153,4 +154,46 @@ svg:not(:root).svg-inline--fa{
     background-color: #e1e1e1;
     overflow-x: auto;
     padding: 5px 15px 15px 15px;
+}
+
+.circle-breath {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 0 0 0 rgb(255, 255, 255);
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    animation: donghua 2.4s infinite;
+    cursor: pointer;
+    scroll-behavior: smooth;
+}
+
+@keyframes donghua {
+    0% {
+        transform: scale(0.60);
+        /* 注意rgba中的a的设置 */
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 60%);
+    }
+
+    60% {
+        transform: scale(1);
+        box-shadow: 0 0 0 36px rgba(255, 255, 255, 0%);
+    }
+
+    100% {
+        transform: scale(0.60);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0%);
+    }
+}
+
+.click{
+    position: absolute;
+    bottom: 10%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 22px;
 }

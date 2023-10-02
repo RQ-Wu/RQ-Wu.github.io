@@ -169,8 +169,15 @@
             </a>
         </span>
     </div>
+    <div class="click", id="scroll-btn">
+        <div class="circle-breath"></div>
+    </div>
+    <div class="click">
+        <p>Click to learn more</p>
+    </div>
 </div>
 <div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <a name="method"></a>
     <div class="root-content" style="padding-top: 10px;">
         <h1 class="section-name">&#128293; Learn T2V Generation with Only <font style="color: red;">8~16</font> Videos &#128293;</h1>
         <img src="assests/lamp.png" style="margin:auto; right: 0; left: 0; width: 100%; display: inline;">
@@ -324,7 +331,7 @@
     </div>
 </div>
 <div style="background-color: white; margin-right: auto; margin-left: auto; text-align: center; padding-top: 35px; padding-bottom: 35px; position: absolute; left: 0; right: 0;">
-    <a href="https://www.freecounterstat.com" title="free stat counter"><img style="position: relative; margin: auto; left: 0; right: 0;" src="https://counter6.optistats.ovh/private/freecounterstat.php?c=y7xk68mk7k4169wtwwru1hup4atbj884" border="0" title="free stat counter" alt="free stat counter"></a>
+    <a href="https://www.freecounterstat.com" title="page view counter"><img style="position: relative; margin: auto; left: 0; right: 0;" src="https://counter6.optistats.ovh/private/freecounterstat.php?c=1thh4qucalbdnq4a3txmcutn1emlfswl" border="0" title="page view counter" alt="page view counter"></a>
     <p>Visitor Count</p>
 </div>
 </body>
@@ -340,6 +347,20 @@
     title_mask.style.height = String(window_height)+'px'
     for (i in imgs)
     {
-        imgs[i].style.height = String(window_height/4)+'px'
+        if (i < 64){
+            imgs[i].style.height = String(window_height/4)+'px';
+        }
     }
+
+    window.onmousewheel=document.onmousewheel=(e)=>{
+    if(e.wheelDelta<0){
+        if (document.documentElement.scrollTop<50){
+            window.scrollTo({top:window_height+30, behavior: 'smooth'});
+        }
+    } 
+}
+var scroll_btn = document.getElementById('scroll-btn');
+    scroll_btn.addEventListener("click",function(){
+        window.scrollTo({top:window_height+30, behavior: 'smooth'});
+    })
 </script>
