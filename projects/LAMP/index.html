@@ -178,10 +178,10 @@
 </div>
 <div style="background-color: white; margin-right: auto; margin-left: auto;">
     <a name="method"></a>
-    <div class="root-content" style="padding-top: 10px;">
+    <div class="root-content" style="padding-top: 10px; width: 65%;">
         <h1 class="section-name">&#128293; Learn T2V Generation with Only <font style="color: red;">8~16</font> Videos &#128293;</h1>
-        <img src="assests/lamp.png" style="margin:auto; right: 0; left: 0; width: 100%; display: inline;">
-        <p class="section-content-text"><strong>Framework of the proposed LAMP.</strong> Our LAMP learns a motion pattern from a small video set and generates videos with the learned motion, which achieves the trade-off between training burden and generation freedom. We transfer text-to-video generation to the first-frame generation and subsequent-frame prediction, i.e., decoupling a video's contents and motions. During the training stage, We add noise and compute loss functions on all but the first frame. Moreover, only the parameters of newly added layers and the query linear layers of self-attention blocks are updated when tuning. During the inference stage, we use a T2I model to generate the first frame. The tuned model only works on denoising the latent features of subsequent frames with the guidance of user prompts.</p>
+        <img src="assests/lamp.png" style="margin:auto; right: 0; left: 0; width: 75%; display: inline;">
+        <p class="section-content-text" style="padding-bottom: 20px;"><strong>Framework of the proposed LAMP.</strong> Our LAMP learns a motion pattern from a small video set and generates videos with the learned motion, which achieves the trade-off between training burden and generation freedom. We transfer text-to-video generation to the first-frame generation and subsequent-frame prediction, i.e., decoupling a video's contents and motions. During the training stage, We add noise and compute loss functions on all but the first frame. Moreover, only the parameters of newly added layers and the query linear layers of self-attention blocks are updated when tuning. During the inference stage, we use a T2I model to generate the first frame. The tuned model only works on denoising the latent features of subsequent frames with the guidance of user prompts.</p>
     </div>
 </div>
 <div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
@@ -352,13 +352,6 @@
         }
     }
 
-    window.onmousewheel=document.onmousewheel=(e)=>{
-    if(e.wheelDelta<0){
-        if (document.documentElement.scrollTop<50){
-            window.scrollTo({top:window_height+30, behavior: 'smooth'});
-        }
-    } 
-}
 var scroll_btn = document.getElementById('scroll-btn');
     scroll_btn.addEventListener("click",function(){
         window.scrollTo({top:window_height+30, behavior: 'smooth'});
