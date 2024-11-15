@@ -97,7 +97,7 @@
 </div>
 <div class="title-mask", id="title-mask">
     <div style="position: absolute; top:20%; left: 0; right: 0;">
-        <h1>Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h1>  
+        <h1><font style="color: red;">R</font>estore <font style="color: red;">A</font>nything with <font style="color: red;">M</font>asks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h1>  
         <p style="font-size: 28px; color: rgb(220, 220, 220);"> ECCV 2024</p>
         <br>
         <p style="font-size: 18px; color: rgb(220, 220, 220);">
@@ -176,8 +176,8 @@
         <h1 class="section-name">Method</h1>
         <img src="method.png" width="1000"/>
         <p class="section-content-text">
-            The illumination of our overall pipeline. 1) Pre-training the model with mask image pre-training method tailored to low-level vision. We randomly mask degraded images at the pixel level with a $50\%$ masking ratio and reconstruct the clean images. 2) The Fine-tuning stage is followed to overcome the input integrity gap caused by changing masked input during pre-training into the whole image during inference.
-We analyze the importance of each network layer for resolving the input integrity gap according to the proposed MAC and rank them in descending order. The top $k\%$ of network layers are selected for fine-tuning on the complete image. 
+            The illumination of our overall pipeline. 1) Pre-training the model with mask image pre-training method tailored to low-level vision. We randomly mask degraded images at the pixel level with a 50% masking ratio and reconstruct the clean images. 2) The Fine-tuning stage is followed to overcome the input integrity gap caused by changing masked input during pre-training into the whole image during inference.
+We analyze the importance of each network layer for resolving the input integrity gap according to the proposed MAC and rank them in descending order. The top k% of network layers are selected for fine-tuning on the complete image. 
         </p>
     </div>
 
@@ -186,6 +186,12 @@ We analyze the importance of each network layer for resolving the input integrit
             Quantitative Comparisons
         </h1>
         <img src="quantitative.png" width="1000">
+        <p class="section-content-text">
+            Quantitative comparison on seven challenging image restoration tasks, 
+            including dehazing, deraining, denoising, motion deblurring, 
+            low-light image enhancement (LLIE), kernel deblurring, and JPEG artifact removal. 
+            <strong>Boldface</strong> and <u>underlined</u> indicate the best and second-best results, respectively.
+        </p>
     </div>
     <div style="padding-top: 20px; padding-bottom: 40px;">
         <h1 class="section-name">
