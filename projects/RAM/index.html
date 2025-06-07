@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</title>
+  
+  <meta name="author" content="Ruiqi Wu">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="lamp.css">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../images/logo.png">
+</head>
+
+<body style="width: 100%;">
+<div class="video-box", id="video-box">
+    <div class="cc rowup">
+        <div class="video-column">
+            <img src="assests/Dehaze/Dehaze0.gif">
+            <img src="assests/Dehaze/Dehaze1.gif">
+            <img src="assests/Dehaze/Dehaze2.gif">
+            <img src="assests/Dehaze/Dehaze3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Deraining/Deraining0.gif">
+            <img src="assests/Deraining/Deraining1.gif">
+            <img src="assests/Deraining/Deraining2.gif">
+            <img src="assests/Deraining/Deraining3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Denoise/Denoise0.gif">
+            <img src="assests/Denoise/Denoise1.gif">
+            <img src="assests/Denoise/Denoise2.gif">
+            <img src="assests/Denoise/Denoise3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Deraining2/Deraining20.gif">
+            <img src="assests/Deraining2/Deraining21.gif">
+            <img src="assests/Deraining2/Deraining22.gif">
+            <img src="assests/Deraining2/Deraining23.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/KernelBlur/KernelBlur0.gif">
+            <img src="assests/KernelBlur/KernelBlur1.gif">
+            <img src="assests/KernelBlur/KernelBlur2.gif">
+            <img src="assests/KernelBlur/KernelBlur3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/LLIE/LLIE0.gif">
+            <img src="assests/LLIE/LLIE1.gif">
+            <img src="assests/LLIE/LLIE2.gif">
+            <img src="assests/LLIE/LLIE3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Dehaze/Dehaze0.gif">
+            <img src="assests/Dehaze/Dehaze1.gif">
+            <img src="assests/Dehaze/Dehaze2.gif">
+            <img src="assests/Dehaze/Dehaze3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Deraining/Deraining0.gif">
+            <img src="assests/Deraining/Deraining1.gif">
+            <img src="assests/Deraining/Deraining2.gif">
+            <img src="assests/Deraining/Deraining3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Denoise/Denoise0.gif">
+            <img src="assests/Denoise/Denoise1.gif">
+            <img src="assests/Denoise/Denoise2.gif">
+            <img src="assests/Denoise/Denoise3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/Deraining2/Deraining20.gif">
+            <img src="assests/Deraining2/Deraining21.gif">
+            <img src="assests/Deraining2/Deraining22.gif">
+            <img src="assests/Deraining2/Deraining23.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/KernelBlur/KernelBlur0.gif">
+            <img src="assests/KernelBlur/KernelBlur1.gif">
+            <img src="assests/KernelBlur/KernelBlur2.gif">
+            <img src="assests/KernelBlur/KernelBlur3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/LLIE/LLIE0.gif">
+            <img src="assests/LLIE/LLIE1.gif">
+            <img src="assests/LLIE/LLIE2.gif">
+            <img src="assests/LLIE/LLIE3.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/dehaze_1.gif">
+            <img src="assests/dehaze_2.gif">
+            <img src="assests/dehaze_3.gif">
+            <img src="assests/dehaze_4.gif">
+        </div>
+    </div>
+</div>
+<div class="title-mask", id="title-mask">
+    <div style="position: absolute; top:20%; left: 0; right: 0;">
+        <h1><font style="color: red;">R</font>estore <font style="color: red;">A</font>nything with <font style="color: red;">M</font>asks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h1>  
+        <p style="font-size: 28px; color: rgb(220, 220, 220);"> ECCV 2024</p>
+        <br>
+        <p style="font-size: 18px; color: rgb(220, 220, 220);">
+            Chu-Jie Qin<sup>1, 2</sup>&nbsp;&nbsp;&nbsp;
+            Rui-Qi Wu</a><sup>1, 2</sup>&nbsp;&nbsp;&nbsp;
+            Zi-Kun Liu<sup>3</sup>&nbsp;&nbsp;&nbsp;
+            Xin Lin</a><sup>4</sup>&nbsp;&nbsp;&nbsp;
+            Chun-Le Guo</a><sup>1, 2</sup>&nbsp;&nbsp;&nbsp;
+            Hyun Hee Park<sup>5</sup>&nbsp;&nbsp;&nbsp;
+            Chong-Yi Li</a><sup>1, 2*</sup>&nbsp;&nbsp;&nbsp;
+        </p>
+        <p style="font-size: 16px; color: rgb(220, 220, 220);">
+            <sup>1</sup>VCIP, CS, Nankai University&nbsp;&nbsp;&nbsp;
+            <sup>2</sup>NKIARI, Shenzhen Futian&nbsp;&nbsp;&nbsp;<br>
+            <sup>3</sup>Samsung Research, China, Beijing (SRC-B)&nbsp;&nbsp;&nbsp;<br>
+            <sup>4</sup>The Department of Camera Innovation Group, Samsung Electronics&nbsp;&nbsp;&nbsp;<br>
+            <sup>5</sup>Sichuan University&nbsp;&nbsp;&nbsp;
+        </p>
+    </div>
+    <div id="button-list">
+        <span class="link-button">
+            <a class="link-button-content", href="https://arxiv.org/abs/2409.19403v1">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                </span>
+                &nbsp;
+                Paper & Supp (More Visual Results)
+            </a>
+        </span>
+        <!-- <span class="link-button">
+            <a class="link-button-content", href="">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                </span>
+                &nbsp;  
+                Supp (More Visual Results)
+            </a>
+        </span> -->
+        <span class="link-button">
+            <a class="link-button-content" href="https://github.com/Dragonisss/RAM", target="_blank">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" version="1.1" viewBox="0 0 16 16" width="1.2em" style="position: relative; top: 0.25em;"><path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                </span>
+                &nbsp; 
+                Code & Pretrained Models
+            </a>
+        </span>
+        <span class="link-button">
+            <a class="link-button-content", href="#bib">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" style="position: relative; top: 0.15em;" width="1em" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16"> <path fill="currentColor" fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" fill="white"></path> <path fill="currentColor" fill-rule="evenodd" d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" fill="white"></path> </svg>
+                </span>
+                &nbsp;  
+                BibTex
+            </a>
+        </span>
+    </div>
+    <div class="click", id="scroll-btn">
+        <div class="circle-breath"></div>
+    </div>
+    <div class="click">
+        <p>Click to learn more</p>
+    </div>
+</div>
+
+<!-- Paper Information -->
+<div class="root-content" style="padding-top: 30px;">
+    <div class="section-content">
+    <h1 class="section-name"> Abstract </h1>
+        <p class="section-content-text">
+            All-in-one image restoration aims to handle multiple degradation types using one model. We propose a simple pipeline for all-in-one blind image restoration to Restore Anything with Masks (RAM). We focus on the image content itself by utilizing the MIM to extract intrinsic image information rather than distinguishing degradation types like other methods. Our pipeline consists of two stages: masked image pre-training and fine-tuning with mask attribute conductance. We design a simple masking pre-training approach tailored to all-in-one image restoration, boosting networks to focus more on extracting image content priors from any degradation, which turns out to be a more balanced (between different restoration tasks) and stronger performance. To bridge the gap of input integrity while preserving learned image priors as much as possible, we selectively fine-tuned a small portion of the layers. Specifically, the importance of each layer is ranked by the proposed Mask Attribute Conductance (MAC), and the layers with higher contributions are selected for finetuning. Extensive quantitative and qualitative experiments demonstrate that our method achieves state-of-the-art performance. Our code and model will be released.
+        </p>
+    </div>
+
+    <div style="padding-top: 20px;">
+        <h1 class="section-name">Method</h1>
+        <img src="method.png" width="1000"/>
+        <p class="section-content-text">
+            The illumination of our overall pipeline. 1) Pre-training the model with mask image pre-training method tailored to low-level vision. We randomly mask degraded images at the pixel level with a 50% masking ratio and reconstruct the clean images. 2) The Fine-tuning stage is followed to overcome the input integrity gap caused by changing masked input during pre-training into the whole image during inference.
+We analyze the importance of each network layer for resolving the input integrity gap according to the proposed MAC and rank them in descending order. The top k% of network layers are selected for fine-tuning on the complete image. 
+        </p>
+    </div>
+
+    <div style="padding-top: 20px;">
+        <h1 class="section-name">
+            Quantitative Comparisons
+        </h1>
+        <img src="quantitative.png" width="1000">
+        <p class="section-content-text">
+            Quantitative comparison on seven challenging image restoration tasks, 
+            including dehazing, deraining, denoising, motion deblurring, 
+            low-light image enhancement (LLIE), kernel deblurring, and JPEG artifact removal. 
+            <strong>Boldface</strong> and <u>underlined</u> indicate the best and second-best results, respectively.
+        </p>
+    </div>
+    <div style="padding-top: 20px; padding-bottom: 40px;">
+        <h1 class="section-name">
+            Visual Comparisons
+        </h1>
+        <img src="bsd68_paper-1.png" width="1000"/>
+        <img src="gopro_paper-1.png" width="1000"/>
+        <img src="haze_paper-1.png" width="1000"/>
+        <img src="lol_paper.png" width="1000"/>
+        <img src="rain_paper-1.png" width="1000"/>
+    </div>
+</div>
+<div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
+    <div class="root-content" style="padding-top: 10px; width: 65%; padding-bottom: 10px;">
+        <div>
+            <h1 class="section-name" style="margin-top: 30px; text-align: left; font-size: 25px;">
+                BibTex
+            </h1>
+            <a name="bib"></a>
+            <pre style="margin-top: 5px;" class="bibtex">
+                <code>
+    @misc{qin2024restoremasksleveragingmask,
+        title={Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration}, 
+        author={Chu-Jie Qin and Rui-Qi Wu and Zikun Liu and Xin Lin and Chun-Le Guo and Hyun Hee Park and Chongyi Li},
+        year={2024},
+        eprint={2409.19403},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2409.19403}, 
+    }</code></pre>
+        </div>
+        <div style="margin-bottom: 50px;">
+            <h1 class="section-name" style="margin-top: 0px; margin-bottom: 10px; text-align: left; font-size: 25px;">
+                Contact
+            </h1>
+            <p class="section-content-text">
+                Feel free to contact us at <strong>chujie.qin AT mail.nankai.edu.cn</strong> or <strong>wuruiqi AT mail.nankai.com</strong>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    window_height =  document.documentElement.clientHeight;
+    window_width =  document.documentElement.clientWidth;
+    video_box = document.getElementById('video-box');
+    title_mask = document.getElementById('title-mask');
+    document.getElementsByTagName
+    imgs = video_box.getElementsByTagName('img');
+    video_box.style.height = String(window_height)+'px'
+    title_mask.style.height = String(window_height)+'px'
+    for (i in imgs)
+    {
+        if (i < 64){
+            imgs[i].style.height = String(window_height/4)+'px';
+        }
+    }
+
+var scroll_btn = document.getElementById('scroll-btn');
+    scroll_btn.addEventListener("click",function(){
+        window.scrollTo({top:window_height+30, behavior: 'smooth'});
+    })
+</script>

@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>DIPO: Dual-State Images Controlled Articulated Object Generation Powered by Diverse Data</title>
+  
+  <meta name="author" content="Ruiqi Wu">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro');
+    
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+    }
+    
+    .root-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .shadow {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+      width: 50%;
+      flex-shrink: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    name {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      display: block;
+      margin-bottom: 20px;
+    }
+    
+    #author-list {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    #author-list a {
+      color: #2196F3;
+      text-decoration: none;
+    }
+    
+    #author-list a:hover {
+      text-decoration: underline;
+    }
+    
+    #institution-list {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    #publication {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin-bottom: 30px;
+    }
+    
+    #button-list {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .link-button {
+      display: inline-block;
+      margin: 0 10px 10px 10px;
+    }
+    
+    .link-button-content {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2196F3;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    .link-button-content:hover {
+      background-color: #1976D2;
+    }
+    
+    .section-name {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .section-content-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      text-align: justify;
+    }
+    
+    .comparison-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 20px;
+    }
+    
+    .comparison-column {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .comparison-column h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    
+    .comparison-item {
+      margin-bottom: 20px;
+    }
+    
+    .comparison-item img {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .method-image {
+      width: 100%;
+      margin: 20px 0;                     
+      border-radius: 5px;
+    }
+    
+    .bibtex {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .result-item {
+      text-align: center;
+    }
+    
+    .result-item img {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .result-item p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+    
+    .dual-image-pair {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    
+    .dual-image-pair img {
+      width: 48%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .pipeline-flow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .pipeline-step {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    
+    .arrow {
+      font-size: 24px;
+      color: #2196F3;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100%;">
+    <!-- Title -->
+    <div class="root-content" style="padding-top: 30px;">
+      <name>DIPO: Dual-State Images Controlled Articulated Object Generation Powered by Diverse Data</name>
+      <br>
+      <div id="author-list">
+        <a href="https://rq-wu.github.io">Ruiqi Wu</a><sup>1,3*</sup>&nbsp;&nbsp;&nbsp;
+        Xinjie Wang<sup>3</sup>&nbsp;&nbsp;&nbsp;
+        Liu Liu<sup>3</sup>&nbsp;&nbsp;&nbsp;
+        <a href="https://scholar.google.com/citations?user=RZLYwR0AAAAJ&hl=en">Chunle Guo</a><sup>1,2†</sup>&nbsp;&nbsp;&nbsp;
+        Jiaxiong Qiu<sup>3</sup>&nbsp;&nbsp;&nbsp;
+        <a href="https://li-chongyi.github.io/">Chongyi Li</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
+        Lichao Huang<sup>3</sup>&nbsp;&nbsp;&nbsp;<br>
+        Zhizhong Su<sup>3</sup>&nbsp;&nbsp;&nbsp;
+        Ming-Ming Cheng<sup>1,2</sup>
+      </div>
+      <div id="institution-list">
+        <sup>1</sup>VCIP, CS, Nankai University&nbsp;&nbsp;&nbsp;
+        <sup>2</sup>NKIARI, Shenzhen Futian&nbsp;&nbsp;&nbsp;
+        <sup>3</sup>Horizon Robotics&nbsp;&nbsp;&nbsp;<br>
+        <sup>*</sup>Work done as Research Intern&nbsp;&nbsp;&nbsp;
+        <sup>†</sup>Corresponding Author
+      </div>
+      <p id="publication">
+        ArXiv Preprint 2025
+      </p>
+      <div id="button-list">
+        <span class="link-button">
+          <a class="link-button-content" href="https://arxiv.org/abs/2505.20460" target="_blank">
+            <span>📄</span>
+            &nbsp;
+            Paper
+          </a>
+        </span>
+        <span class="link-button">
+          <a class="link-button-content" href="#" target="_blank">
+            <span>💻</span>
+            &nbsp; 
+            Code
+          </a>
+        </span>
+        <span class="link-button">
+          <a class="link-button-content" href="#" target="_blank">
+            <span>🗂️</span>
+            &nbsp; 
+            Dataset
+          </a>
+        </span>
+        <span class="link-button">
+          <a class="link-button-content" href="#" target="_blank">
+            <span>🎥</span>
+            &nbsp; 
+            Demo
+          </a>
+        </span>
+        <span class="link-button">
+          <a class="link-button-content" href="#bib">
+            <span>📚</span>
+            &nbsp;  
+            BibTex
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Visual Results -->
+    <div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
+      <div class="root-content" style="padding-top: 10px; padding-bottom: 30px;">
+        <h1 class="section-name">🔥Controllable Articulated Object Generation from Dual-State Images 🔥</h1>
+        <p class="section-content-text">
+          Our DIPO framework generates high-quality articulated 3D objects from dual-state image pairs (resting and articulated states). 
+          Unlike single-image methods that struggle with motion ambiguity, our approach leverages explicit articulation information for precise control.
+        </p>
+        
+        <div class="relative w-full max-w-5xl mx-auto">
+          <!-- Previous Button -->
+          <button id="prevBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow z-10" style="position: absolute; left: -50px; top: 40%; box-shadow: 0 0px 10px #1976d271; border: 1px solid #1976D2;">
+            ◀
+          </button>
+        
+          <!-- Slide Viewport -->
+          <div class="overflow-hidden">
+            <div id="gallerySlide" class="flex transition-transform duration-500">
+              <!-- Cards inserted by JS -->
+            </div>
+          </div>
+        
+          <!-- Next Button -->
+          <button id="nextBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow z-10" style="position: absolute; right: -50px; top: 40%; box-shadow: 0 0 10px #1976d271; border: 1px solid #1976D2;">
+            ▶
+          </button>
+        </div>
+
+        <h1 class="section-name">🔧 LEGO-Art Pipeline: Building Complex Articulated Objects</h1>
+        <div class="pipeline-flow">
+          <div class="pipeline-step">
+            <strong>Description Roller</strong><br>
+            Natural Language
+          </div>
+          <span class="arrow">→</span>
+          <div class="pipeline-step">
+            <strong>Layout Builder</strong><br>
+            Grid Occupancy
+          </div>
+          <span class="arrow">→</span>
+          <div class="pipeline-step">
+            <strong>Scripting Toolkit</strong><br>
+            Precise Coordinates
+          </div>
+          <span class="arrow">→</span>
+          <div class="pipeline-step">
+            <strong>Retrieval & Render</strong><br>
+            3D Object + Images
+          </div>
+          <span class="arrow">→</span>
+          <div class="pipeline-step">
+            <strong>Visual Filter</strong><br>
+            Quality Check
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper Information -->
+    <div class="root-content" style="padding-top: 30px;">
+      <div class="section-content">
+        <h1 class="section-name">Abstract</h1>
+        <p class="section-content-text">
+          We present DIPO, a novel framework for the controllable generation of articulated 3D objects from a pair of images: one depicting the object in a resting state and the other in an articulated state. Compared to the single-image approach, our dual-image input imposes only a modest overhead for data collection, but at the same time provides important motion information, which is a reliable guide for predicting kinematic relationships between parts. Specifically, we propose a dual-image diffusion model that captures relationships between the image pair to generate part layouts and joint parameters. In addition, we introduce a Chain-of-Thought (CoT) based graph reasoner that explicitly infers part connectivity relationships. To further improve robustness and generalization on complex articulated objects, we develop a fully automated dataset expansion pipeline, named LEGO-Art, that enriches the diversity and complexity of PartNet-Mobility dataset. We propose PM-X, a large-scale dataset of complex articulated 3D objects, accompanied by rendered images, URDF annotations, and textual descriptions. Extensive experiments demonstrate that DIPO significantly outperforms existing baselines in both the resting state and the articulated state, while the proposed PM-X dataset further enhances generalization to diverse and structurally complex articulated objects.
+        </p>
+      </div>
+
+      <div style="padding-top: 20px;">
+        <h1 class="section-name">Method Overview</h1>
+        <img class="method-image" src="method.png" alt="Method Overview">
+        <p class="section-content-text">
+          Our DIPO framework consists of three key components:
+          <br><br>
+          <strong>1. Dual-State Image Conditioning:</strong> We condition the denoising process on both resting-state and articulated-state images using DINOv2 features. A Dual-State Injection Module integrates motion-aware cues by performing cross-attention between the two states.
+          <br><br>
+          <strong>2. Chain-of-Thought Graph Reasoner:</strong> This module predicts articulated part connectivity graphs from dual-state images using a step-by-step reasoning paradigm. It identifies candidate parts, estimates spatial layouts, verifies articulation rules, and infers attachment relationships.
+          <br><br>
+          <strong>3. LEGO-Art Pipeline:</strong> A fully automated synthesis pipeline that generates complex articulated 3D assets by assembling part primitives from existing datasets. It includes Description Roller, Layout Builder, Scripting Toolkit, Retrieval & Render, and Visual Filter modules.
+        </p>
+      </div>
+
+      <div style="padding-top: 20px;">
+        <h1 class="section-name">PM-X Dataset & LEGO-Art</h1>
+        <p class="section-content-text">
+          We introduce PM-X (PartNet-Mobility-Complex), a large-scale dataset of structurally complex articulated objects built using our LEGO-Art pipeline.
+        </p>
+        <img class="method-image" src="LEGO.png" alt="Method Overview">
+        
+        <div class="result-grid">
+          <div class="result-item">
+            <img src="https://via.placeholder.com/300x300/e3f2fd/1976d2?text=Storage+Furniture" alt="PM-X Example 1">
+            <p>Complex Storage Furniture</p>
+          </div>
+          <div class="result-item">
+            <img src="https://via.placeholder.com/300x300/e8f5e9/4caf50?text=Multi-Drawer+Cabinet" alt="PM-X Example 2">
+            <p>Multi-Drawer Cabinet</p>
+          </div>
+          <div class="result-item">
+            <img src="https://via.placeholder.com/300x300/fff3e0/ff9800?text=Articulated+Table" alt="PM-X Example 3">
+            <p>Articulated Table</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top: 20px;">
+        <h1 class="section-name">Quantitative Results</h1>
+        <p class="section-content-text">
+          We evaluate our method on both PartNet-Mobility and ACD datasets, demonstrating superior performance in reconstruction quality and graph prediction accuracy.
+        </p>
+        
+        <h3>Results on PartNet-Mobility Test Set</h3>
+        <div class="table-container">
+          <table>
+            <tr>
+              <th rowspan="2">Method</th>
+              <th colspan="6">Reconstruction Quality</th>
+              <th rowspan="2">Graph<br>Acc% ↑</th>
+            </tr>
+            <tr>
+              <th>RS-dgIoU ↓</th>
+              <th>AS-dgIoU ↓</th>
+              <th>RS-dcDist ↓</th>
+              <th>AS-dcDist ↓</th>
+              <th>RS-dCD ↓</th>
+              <th>AS-dCD ↓</th>
+            </tr>
+            <tr>
+              <td>URDFormer [6]</td>
+              <td>1.2327</td>
+              <td>1.2332</td>
+              <td>0.2885</td>
+              <td>0.4403</td>
+              <td>0.4417</td>
+              <td>0.6910</td>
+              <td>6.62</td>
+            </tr>
+            <tr>
+              <td>NAP-ICA [18]</td>
+              <td>0.5706</td>
+              <td>0.5765</td>
+              <td>0.0563</td>
+              <td>0.2547</td>
+              <td>0.0209</td>
+              <td>0.3473</td>
+              <td>25.06</td>
+            </tr>
+            <tr>
+              <td>SINGAPO [23]</td>
+              <td>0.5134</td>
+              <td>0.5236</td>
+              <td>0.0487</td>
+              <td>0.1107</td>
+              <td>0.0191</td>
+              <td>0.1270</td>
+              <td>75.97</td>
+            </tr>
+            <tr style="background-color: #e8f5e9;">
+              <td><strong>DIPO (Ours)</strong></td>
+              <td><strong>0.4561</strong></td>
+              <td><strong>0.4683</strong></td>
+              <td><strong>0.0359</strong></td>
+              <td><strong>0.0732</strong></td>
+              <td><strong>0.0132</strong></td>
+              <td><strong>0.0423</strong></td>
+              <td><strong>85.06</strong></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div style="padding-top: 20px;">
+        <h1 class="section-name">Qualitative Comparison</h1>
+        <img class="method-image" src="comparison.png" alt="Qualitative Comparison">
+        <p class="section-content-text">
+          Our method demonstrates superior visual quality and better accuracy in articulation graph prediction. Thanks to the large-scale structurally diverse training provided by the PM-X dataset, DIPO shows better robustness when handling complex objects or real-world data.
+        </p>
+      </div>
+
+      <div style="padding-top: 20px;">
+        <h1 class="section-name">Acknowledgements</h1>
+        <p class="section-content-text">
+          This work was done while Ruiqi Wu was a Research Intern with Horizon Robotics. We thank the reviewers for their valuable feedback.
+        </p>
+      </div>
+
+      <div>
+        <h1 class="section-name" style="margin-top: 30px; text-align: left; font-size: 25px;">
+          BibTex
+        </h1>
+        <a name="bib"></a>
+        <pre class="bibtex">
+@article{wu2025dipo,
+    title={DIPO: Dual-State Images Controlled Articulated Object Generation Powered by Diverse Data},
+    author={Wu, Ruiqi and Wang, Xinjie and Liu, Liu and Guo, Chunle and Qiu, Jiaxiong and Li, Chongyi and Huang, Lichao and Su, Zhizhong and Cheng, Ming-Ming},
+    journal={arXiv preprint arXiv:2505.20460},
+    year={2025}
+}</pre>
+      </div>
+      
+      <div style="margin-bottom: 50px;">
+        <h1 class="section-name" style="margin-top: 30px; margin-bottom: 10px; text-align: left; font-size: 25px;">
+          Contact
+        </h1>
+        <p class="section-content-text">
+          Feel free to contact us at <strong>wuruiqi@mail.nankai.edu.cn</strong>
+        </p>
+      </div>
+    </div>
+
+    <div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto; text-align: center; padding-top: 35px; padding-bottom: 35px;">
+      <p>Page views</p>
+      <img src="https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://dipo-articulated.github.io" alt="Hits">
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$']]},
+        messageStyle: "none"
+    });
+    const sampleData = [
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+    {
+      dualImages: ["/images/item2_rest.png", "/images/item2_open.png"],
+      sequence: [
+        "/images/item2_seq/0.png",
+        "/images/item2_seq/1.png",
+        "/images/item2_seq/2.png",
+        "/images/item2_seq/3.png",
+      ],
+    },
+    {
+      dualImages: ["/images/item3_rest.png", "/images/item3_open.png"],
+      sequence: [
+        "/images/item3_seq/0.png",
+        "/images/item3_seq/1.png",
+        "/images/item3_seq/2.png",
+        "/images/item3_seq/3.png",
+      ],
+    },
+    {
+      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      sequence: [
+        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
+        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+      ],
+    },
+  ];
+
+  let currentPage = 0;
+  const itemsPerPage = 2;
+  const gallerySlide = document.getElementById("gallerySlide");
+
+  function renderPage() {
+    gallerySlide.innerHTML = "";
+
+    for (let i = 0; i < sampleData.length; i++) {
+      const item = sampleData[i];
+      const sliderId = `slider_${i}`;
+      const imgId = `sequenceImage_${i}`;
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="grid grid-cols-3 gap-4 bg-white p-4 rounded-xl shadow">
+          <div class="space-y-2">
+            <img src="${item.dualImages[0]}" class="w-full aspect-square object-contain rounded shadow" />
+            <img src="${item.dualImages[1]}" class="w-full aspect-square object-contain rounded shadow" />
+          </div>
+          <div class="col-span-2 flex flex-col items-center space-y-4">
+            <img id="${imgId}" src="${item.sequence[0]}" class="w-full aspect-square object-contain rounded shadow" />
+            <input id="${sliderId}" type="range" min="0" max="${item.sequence.length - 1}" value="0" class="w-3/4" />
+          </div>
+        </div>
+      `;
+
+      gallerySlide.appendChild(card);
+
+      setTimeout(() => {
+        document.getElementById(sliderId).addEventListener("input", (e) => {
+          document.getElementById(imgId).src = item.sequence[e.target.value];
+        });
+      }, 0);
+    }
+  }
+
+  function slide() {
+    // 滑动动画控制
+    const offset = -currentPage * 100;
+    gallerySlide.style.transform = `translateX(${offset}%)`;
+  }
+
+  const maxPage = Math.floor((sampleData.length + 1) / itemsPerPage);
+  console.log(maxPage);
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    currentPage = (currentPage + 1) % (maxPage);
+    console.log(currentPage);
+    renderPage();
+    slide();
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    currentPage = (currentPage - 1) % (maxPage);
+    if (currentPage < 0) {
+      currentPage = maxPage - 1;
+    } 
+    console.log(currentPage);
+    renderPage();
+    slide();
+  });
+
+  renderPage();
+</script>
+
+</html>

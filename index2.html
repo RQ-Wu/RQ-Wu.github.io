@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rui-Qi Wu - Academic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --secondary: #34a853;
+      --surface: #ffffff;
+      --background: #f8f9fa;
+      --text: #2d2d2d;
+      --card-bg: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.06);
+      --accent: #67a0ff;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: var(--text);
+      padding: 1rem;
+      font-size: 14px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 12px 36px var(--shadow);
+      padding: 2rem;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+    .profile-image {
+      width: 180px;
+      height: 240px;
+      border-radius: 18px;
+      object-fit: cover;
+      /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06); */
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hero-content h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+    .hero-content h1::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .hero-content p {
+      margin: 0.5rem 0;
+      color: #5f6368;
+      font-size: 0.9rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(26, 115, 232, 0.08);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      z-index: -1;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+    .social-link:hover {
+      color: white;
+      transform: translateX(6px);
+    }
+    .social-link:hover::before {
+      transform: scaleX(1);
+    }
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    .section-header {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding: 0.75rem 0;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      display: inline-block;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+      border-radius: 1.5px;
+    }
+    .section-title:hover::before {
+      width: 80px;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 0.5fr);
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .news-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(26,115,232,0.1) 0%, rgba(52,168,83,0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    .news-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+    }
+    .news-card:hover::before {
+      opacity: 1;
+    }
+    .news-date {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+      position: relative;
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      background: rgba(52, 168, 83, 0.1);
+    }
+    .news-list {
+      list-style: none;
+      max-height: 300px;
+      overflow-y: auto;
+      border-top: 2px solid #eee;
+      padding: 1.25rem 0;
+    }
+    .news-list::-webkit-scrollbar {
+      width: 8px;
+    }
+    .news-list::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    .news-list::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+    }
+    .news-item {
+      padding: 0.475rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .news-item:last-child {
+      border-bottom: none;
+    }
+    .news-item:hover {
+      background: rgba(26, 115, 232, 0.05);
+      transform: translateX(8px);
+    }
+    .news-item-date {
+      flex-shrink: 0;
+      font-weight: 600;
+      color: var(--secondary);
+      min-width: 120px;
+      position: relative;
+    }
+    .news-item-date::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 50%;
+    }
+    .news-item-content h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    .news-item-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.875rem;
+    }
+    .publications-list {
+      list-style: none;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .publication-item {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .publication-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(26,115,232,0.1) 0%, rgba(52,168,83,0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    .publication-item:hover {
+      transform: translateX(-8px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+    }
+    .publication-item:hover::before {
+      opacity: 1;
+    }
+    .pub-thumbnail {
+      width: 280px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+    .pub-thumbnail:hover {
+      transform: scale(1.05);
+    }
+    .pub-title {
+      font-size: 1.25rem;   
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s ease;
+    }
+    .pub-title:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .pub-authors {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    .pub-links {
+      display: flex;
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .pub-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      font-size: 0.875rem;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+    .pub-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    .pub-links a:hover::after {
+      width: 100%;
+    }
+    .awards-section {
+      margin-top: 2rem;
+    }
+    .award-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+    .award-item:hover {
+      background: rgba(26, 115, 232, 0.05);
+      transform: translateX(8px);
+    }
+    .award-item:last-child {
+      border-bottom: none;
+    }
+    .award-icon {
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+    .award-content {
+      flex: 1;
+    }
+    .award-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .award-description {
+      color: #666;
+      font-size: 0.875rem;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .publication-item {
+        grid-template-columns: 1fr;
+      }
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      .news-item {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .news-item-date {
+        margin-bottom: 0.5rem;
+      }
+      .award-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <img src="images/my.jpg" 
+           alt="Profile" class="profile-image" />
+      <div class="hero-content">
+        <h1>Rui-Qi Wu (武睿祺)</h1>
+        <p>Rui-Qi Wu is a PhD candidate of TMCC, College of Computer Science, Nankai University, under the supervision of Prof. Ming-Ming Cheng. He received the B.E. degree from Wuhan University of Technology (WHUT) in 2022. His research interests are in computer vision and machine learning, with a particular focus on AIGC.
+        </p>
+        <div class="social-links">
+          <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" class="social-link">Google Scholar</a>
+          <a href="https://github.com/RQ-Wu" class="social-link">GitHub</a>
+          <a href="https://www.zhihu.com/people/hou-ban-lu-shui" class="social-link">Zhihu</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Recent News -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Recent News</h2>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-date">Jul 2024</div>
+          <h3>One paper accepted by ECCV 2024</h3>
+        </div>
+        <div class="news-card">
+          <div class="news-date">Feb 2024</div>
+          <h3>One paper accepted by CVPR 2024</h3>
+        </div>
+        <div class="news-card">
+          <div class="news-date">Nov 2023</div>
+          <h3>Served as reviewer for CVPR 2024</h3>
+        </div>
+      </div>
+      <ul class="news-list">
+        <li class="news-item">
+          <div class="news-item-date">Sep 2023</div>
+          <div class="news-item-content">
+            <h3>Served as reviewer for IEEE TPAMI and TCSVT</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Jul 2023</div>
+          <div class="news-item-content">
+            <h3>Served as reviewer for AAAI 2024</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Mar 2023</div>
+          <div class="news-item-content">
+            <h3>One paper accepted by IEEE TMM</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Feb 2023</div>
+          <div class="news-item-content">
+            <h3>One paper accepted by CVPR 2023</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Jan 2023</div>
+          <div class="news-item-content">
+            <h3>AAAI 2023 paper awarded Oral Presentation</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Dec 2022</div>
+          <div class="news-item-content">
+            <h3>Served as reviewer for Neurocomputing</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Nov 2022</div>
+          <div class="news-item-content">
+            <h3>One paper accepted by AAAI 2023</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Apr 2022</div>
+          <div class="news-item-content">
+            <h3>Third Place in Megcup 2022 RAW Image De-noising</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Apr 2022</div>
+          <div class="news-item-content">
+            <h3>Second Runner-up in CVPRW 2022 Night Photography Challenge</h3>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-item-date">Mar 2021</div>
+          <div class="news-item-content">
+            <h3>ICME 2021 paper accepted as Oral Presentation</h3>
+          </div>
+        </li>
+      </ul>
+    </section>
+    
+    <!-- Publications -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Publications</h2>
+      </div>
+      <ul class="publications-list">
+        <li class="publication-item">
+          <img src="images/LAMP/LOGO.png" alt="LAMP" class="pub-thumbnail" />
+          <div>
+            <h3 class="pub-title">LAMP: Learn A Motion Pattern for Few-Shot Video Generation</h3>
+            <div class="pub-authors">Rui-Qi Wu, Liang-Yu Chen, Tong Yang, Chun-Le Guo, Chong-Yi Li, Xiang-Yu Zhang</div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2310.10769">PDF</a>
+              <a href="https://rq-wu.github.io/projects/LAMP/index.html">Project</a>
+              <a href="https://github.com/RQ-Wu/LAMP">Code</a>
+              <a href="bibs/LAMP.html">BibTex</a>
+            </div>
+          </div>
+        </li>
+        <li class="publication-item">
+          <img src="images/RIDCP/dehaze.gif" alt="RIDCP" class="pub-thumbnail" />
+          <div>
+            <h3 class="pub-title">RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors</h3>
+            <div class="pub-authors">Rui-Qi Wu, Zheng-Peng Duan, Chun-Le Guo, Zhi Chai, Chong-Yi Li</div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2304.03994">PDF</a>
+              <a href="projects/RIDCP/index.html">Project</a>
+              <a href="https://github.com/RQ-Wu/RIDCP">Code</a>
+              <a href="bibs/RIDCP.html">BibTex</a>
+            </div>
+          </div>
+        </li>
+        <li class="publication-item">
+          <img src="images/URanker/main.png" alt="Underwater Ranker" class="pub-thumbnail" />
+          <div>
+            <h3 class="pub-title">Underwater Ranker: Learn Which Is Better and How to Be Better</h3>
+            <div class="pub-authors">Chun-Le Guo*, Rui-Qi Wu*, Xin Jin, Ling-Hao Han, Zhi Chai, Wei-Dong Zhang, Chong-Yi Li</div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2208.06857">PDF</a>
+              <a href="https://li-chongyi.github.io/URanker_files/">Project</a>
+              <a href="https://github.com/RQ-Wu/UnderwaterRanker">Code</a>
+              <a href="bibs/underwater_ranker.html">BibTex</a>
+            </div>
+          </div>
+        </li>
+        <li class="publication-item">
+          <img src="images/StereoSuperpixel/ICME.png" alt="ICME" class="pub-thumbnail" />
+          <div>
+            <h3 class="pub-title">Stereo Superpixel Segmentation Via Dual-Attention Fusion Networks</h3>
+            <div class="pub-authors">Rui-Qi Wu, Ya-Juan Du, Hua Li, Yu-Cong Dai</div>
+            <div class="pub-links">
+              <a href="https://ieeexplore.ieee.org/abstract/document/9428302">PDF</a>
+              <a href="bibs/ICME.html">BibTex</a>
+            </div>
+          </div>
+        </li>
+        <li class="publication-item">
+          <img src="images/RAM/2_pipeline-1.png" alt="RAM" class="pub-thumbnail" />
+          <div>
+            <h3 class="pub-title">Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h3>
+            <div class="pub-authors">Chu-Jie Qin, Rui-Qi Wu, Zi-Kun Liu, Xin Lin, Chun-Le Guo, Hyun Hee Park, Chong-Yi Li</div>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2409.19403v1">PDF</a>
+              <a href="https://rq-wu.github.io/projects/RAM/index.html">Project</a>
+              <a href="https://github.com/Dragonisss/RAM">Code</a>
+              <a href="bibs/RAM.html">BibTex</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    
+    <!-- Honors & Awards -->
+    <section class="section awards-section">
+      <div class="section-header">
+        <h2 class="section-title">Honors & Awards</h2>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-content">
+          <div class="award-title">National Scholarship, 2023</div>
+          <div class="award-description">Top 0.2% student in China</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥈</div>
+        <div class="award-content">
+          <div class="award-title">RAW Image Blind De-noising Competition</div>
+          <div class="award-description">Second Runner-up (Team Feedforward), Megcup 2022</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-content">
+          <div class="award-title">Night Photography Rendering Challenge</div>
+          <div class="award-description">Second Runner-up (Team Feedback), CVPR Workshop 2022</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-content">
+          <div class="award-title">Kaggle Cassava Leaf Disease Classification</div>
+          <div class="award-description">Bronze Medal (Top 7%, 256/3900)</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

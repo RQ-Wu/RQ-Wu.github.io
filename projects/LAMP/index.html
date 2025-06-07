@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>LAMP: Learn A Motion Pattern for Few-Shot Video Generation</title>
+  
+  <meta name="author" content="Ruiqi Wu">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="lamp.css">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../images/logo.png">
+</head>
+
+<body style="width: 100%;">
+<div class="video-box", id="video-box">
+    <div class="cc rowup">
+        <div class="video-column">
+            <img src="assests/inference-birds_fly_in_the_pink_sky.gif">
+            <img src="assests/inference-birds_fly_in_the_sky,_over_the_sea.gif">
+            <img src="assests/birds_fly_in_the_sky,_snow_land.gif">
+            <img src="assests/inference-many_birds_fly_over_a_plaza.gif">
+
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-lava_waterfall.gif">
+            <img src="assests/inference-waterfall,_crowds_around (1).gif">
+            <img src="assests/inference-winter_waterfall.gif">
+            <img src="assests/waterfall,_comic_style.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-GTA5_poster,_a_man_plays_the_guitar.gif">
+            <img src="assests/inference-a_woman_plays_the_guitar (1).gif">
+            <img src="assests/inference-an_astronaut_plays_the_guitar,_photorelastic.gif">
+            <img src="assests/Minecraft_human_plays_the_guitar.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_horse_runs_in_the_universe (1).gif">
+            <img src="assests/inference-a_horse_runs_on_the_Mars (3).gif">
+            <img src="assests/a_red_horse_runs_in_the_sky.gif">
+            <img src="assests/inference-a_horse_runs_on_the_road (1).gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-fireworks_in_desert_night.gif">
+            <img src="assests/inference-fireworks_over_the_mountains (1).gif">
+            <img src="assests/fireworks,_grass_land.gif">
+            <img src="assests/inference-fireworks_in_the_night_city.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-pink_helicopter_in_the_sky.gif">
+            <img src="assests/inference-a_helicopter_flies_over_the_highway.gif">
+            <img src="assests/inference-a_helicopter_over_the_sea (1).gif">
+            <img src="assests/a_LEGO_helicopter_flies_in_the_sky.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_panda,_head_photo (1).gif">
+            <img src="assests/inference-a_handsome_man (1).gif">
+            <img src="assests/inference-head_photo_of_a_cute_girl,_comic_style (1).gif">
+            <img src="assests/head_photo_of_a_sodier.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_rainy_day (1).gif">
+            <img src="assests/inference-a_pond_in_heavy_rain (1).gif">
+            <img src="assests/inference-a_car_in_rain (2).gif">
+            <img src="assests/rainy_mountain.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-birds_fly_in_the_pink_sky.gif">
+            <img src="assests/inference-birds_fly_in_the_sky,_over_the_sea.gif">
+            <img src="assests/birds_fly_in_the_sky,_snow_land.gif">
+            <img src="assests/inference-many_birds_fly_over_a_plaza.gif">
+
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-lava_waterfall.gif">
+            <img src="assests/inference-waterfall,_crowds_around (1).gif">
+            <img src="assests/inference-winter_waterfall.gif">
+            <img src="assests/waterfall,_comic_style.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-GTA5_poster,_a_man_plays_the_guitar.gif">
+            <img src="assests/inference-a_woman_plays_the_guitar (1).gif">
+            <img src="assests/inference-an_astronaut_plays_the_guitar,_photorelastic.gif">
+            <img src="assests/Minecraft_human_plays_the_guitar.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_horse_runs_in_the_universe (1).gif">
+            <img src="assests/inference-a_horse_runs_on_the_Mars (3).gif">
+            <img src="assests/a_red_horse_runs_in_the_sky.gif">
+            <img src="assests/inference-a_horse_runs_on_the_road (1).gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-fireworks_in_desert_night.gif">
+            <img src="assests/inference-fireworks_over_the_mountains (1).gif">
+            <img src="assests/fireworks,_grass_land.gif">
+            <img src="assests/inference-fireworks_in_the_night_city.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-pink_helicopter_in_the_sky.gif">
+            <img src="assests/inference-a_helicopter_flies_over_the_highway.gif">
+            <img src="assests/inference-a_helicopter_over_the_sea (1).gif">
+            <img src="assests/a_LEGO_helicopter_flies_in_the_sky.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_panda,_head_photo (1).gif">
+            <img src="assests/inference-a_handsome_man (1).gif">
+            <img src="assests/inference-head_photo_of_a_cute_girl,_comic_style (1).gif">
+            <img src="assests/head_photo_of_a_sodier.gif">
+        </div>
+        <div class="video-column">
+            <img src="assests/inference-a_rainy_day (1).gif">
+            <img src="assests/inference-a_pond_in_heavy_rain (1).gif">
+            <img src="assests/inference-a_car_in_rain (2).gif">
+            <img src="assests/rainy_mountain.gif">
+        </div>
+    </div>
+</div>
+<div class="title-mask", id="title-mask">
+    <div style="position: absolute; top:20%; left: 0; right: 0;">
+        <h1><font style="color: red; text-shadow: 0.05em -0.05em rgba(255, 200, 160, 0.634);">LAMP</font>: <font style="color: red;">L</font>earn <font style="color: red;">A</font> <font style="color: red;">M</font>otion <font style="color: red;">P</font>attern for Few-Shot Video Generation</h1>  
+        <p style="font-size: 28px; color: rgb(220, 220, 220);"> CVPR 2024</p>
+        <br>
+        <p style="font-size: 18px; color: rgb(220, 220, 220);">
+            Ruiqi Wu<sup>1,2</sup>, &nbsp;&nbsp;
+            Liangyu Chen<sup>2</sup>, &nbsp;&nbsp;
+            Tong Yang<sup>2</sup>, &nbsp;&nbsp;
+            Chunle Guo<sup>1,*</sup>, &nbsp;&nbsp;
+            Chongyi Li<sup>1</sup>, &nbsp;&nbsp;
+            Xiangyu Zhang<sup>2</sup>
+        </p>
+        <p style="font-size: 16px; color: rgb(220, 220, 220);">
+            VCIP, CS, Nankai University<sup>1</sup>, &nbsp;&nbsp;
+            MEGVII Technology<sup>2</sup>
+        </p>
+    </div>
+    <div id="button-list">
+        <span class="link-button">
+            <a class="link-button-content", href="">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                </span>
+                &nbsp;
+                Paper
+            </a>
+        </span>
+        <span class="link-button">
+            <a class="link-button-content", href="">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                </span>
+                &nbsp;  
+                Supp (More Visual Results)
+            </a>
+        </span>
+        <span class="link-button">
+            <a class="link-button-content" href="https://github.com/RQ-Wu/LAMP", target="_blank">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" version="1.1" viewBox="0 0 16 16" width="1.2em" style="position: relative; top: 0.25em;"><path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                </span>
+                &nbsp; 
+                Code + Pretrained Models
+            </a>
+        </span>
+        <span class="link-button">
+            <a class="link-button-content", href="#bib">
+                <span>
+                    <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" style="position: relative; top: 0.15em;" width="1em" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16"> <path fill="currentColor" fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" fill="white"></path> <path fill="currentColor" fill-rule="evenodd" d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" fill="white"></path> </svg>
+                </span>
+                &nbsp;  
+                BibTex
+            </a>
+        </span>
+    </div>
+    <div class="click", id="scroll-btn">
+        <div class="circle-breath"></div>
+    </div>
+    <div class="click">
+        <p>Click to learn more</p>
+    </div>
+</div>
+<div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <a name="method"></a>
+    <div class="root-content" style="padding-top: 10px; width: 65%;">
+        <h1 class="section-name">&#128293; Learn T2V Generation with Only <font style="color: red;">8~16</font> Videos &#128293;</h1>
+        <img src="assests/lamp.png" style="margin:auto; right: 0; left: 0; width: 75%; display: inline;">
+        <p class="section-content-text" style="padding-bottom: 20px;"><strong>Framework of the proposed LAMP.</strong> Our LAMP learns a motion pattern from a small video set and generates videos with the learned motion, which achieves the trade-off between training burden and generation freedom. We transfer text-to-video generation to the first-frame generation and subsequent-frame prediction, i.e., decoupling a video's contents and motions. During the training stage, We add noise and compute loss functions on all but the first frame. Moreover, only the parameters of newly added layers and the query linear layers of self-attention blocks are updated when tuning. During the inference stage, we use a T2I model to generate the first frame. The tuned model only works on denoising the latent features of subsequent frames with the guidance of user prompts.</p>
+    </div>
+</div>
+<div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
+    <div class="root-content" style="padding-top: 10px; width: 65%; padding-bottom: 10px;">
+        <h1 class="section-name">&#127916;&nbsp;&nbsp; Text-to-Video Results &nbsp;&nbsp;&#127916;</h1>
+        <table style="width: 100%;">
+            <tbody>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/inference-a_horse_runs_in_the_universe (1).gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a_horse_runs_on_the_Mars (3).gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a_horse_runs_on_the_road (1).gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td>A horse runs in the universe.</td>
+                    <td>A horse runs on the Mars.</td>
+                    <td>A horse runs on the road.</td>
+                </tr>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/inference-fireworks_in_desert_night.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-fireworks_over_the_mountains (1).gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-fireworks_in_the_night_city.gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td>Fireworks in desert night.</td>
+                    <td>Fireworks over the mountains.</td>
+                    <td>Fireworks in the night city.</td>
+                </tr>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/inference-GTA5_poster,_a_man_plays_the_guitar.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a_woman_plays_the_guitar (1).gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-an_astronaut_plays_the_guitar,_photorelastic.gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td>GTA5 poster, a man plays the guitar.</td>
+                    <td>A woman plays the guitar.</td>
+                    <td>An astronaut plays the guitar, photorealistic.</td>
+                </tr>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/inference-birds_fly_in_the_pink_sky.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-birds_fly_in_the_sky,_over_the_sea.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-many_birds_fly_over_a_plaza.gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td>Birds fly in the pink sky.</td>
+                    <td>Birds fly in the sky, over the sea.</td>
+                    <td>Many Birds fly over a plaza.</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <p class="section-content-text"><strong>Our text-to-video results</strong>. The video prompts are listed, and the motion prompts are "A horse run", "Firework", "Plays the guitar", "Birds fly", respectively. Our LAMP works effectively on diverse motions. The generated videos are temporal consistent and close to the video prompts. Moreover, two advantages of LAMP can be reflected in the above results. (1) The proposed first-frame-conditioned training strategy allows us to use powerful SD-XL for first-frame generation, which is beneficial to producing highly detailed following frames. (2) Good semantic generalization properties of the diffusion model are preserved (e.g. imposing the motion "play the guitar" on GTA5-poster style) since our tuning way.</p>
+    </div>
+</div>
+<div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <div class="root-content" style="padding-top: 10px;width: 65%; padding-bottom: 10px;">
+        <h1 class="section-name">&#127902;&nbsp;&nbsp; Video Editing Results &nbsp;&nbsp;&#127902;</h1>
+        <table style="width: 100%;">
+            <tbody>
+                <tr class="prompt-row">
+                    <td> Origin Videos </td>
+                    <td> Editing Result-1</td>
+                    <td> Editing Result-2</td>
+                </tr>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/run.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a girl in black runs on the road.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a man runs on the road.gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td></td>
+                    <td>A girl in black runs on the road.</td>
+                    <td>A man runs on the road.</td>
+                </tr>
+                <tr class="result-row">
+                    <td>
+                        <img src="assests/dance.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a man is dancing.gif">
+                    </td>
+                    <td>
+                        <img src="assests/inference-a girl in white is dancing.gif">
+                    </td>
+                </tr>
+                <tr class="prompt-row">
+                    <td></td>
+                    <td>A man is dancing.</td>
+                    <td>A girl in white is dancing.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
+    <div class="root-content" style="padding-top: 10px; width: 65%; padding-bottom: 10px;">
+        <div>
+            <h1 class="section-name" style="margin-top: 30px; text-align: left; font-size: 25px;">
+                BibTex
+            </h1>
+            <a name="bib"></a>
+            <pre style="margin-top: 5px;" class="bibtex">
+                <code>
+@inproceedings{wu2024lamp,
+      title={LAMP: Learn A Motion Pattern for Few-Shot Video Generation},
+      author={Wu, Ruiqi and Chen, Liangyu and Yang, Tong and Guo, Chunle and Li, Chongyi and Zhang, Xiangyu},
+      booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+      year={2024}
+}</code></pre>
+        </div>
+        <div style="margin-bottom: 0px;">
+            <h1 class="section-name" style="margin-top: 0px; margin-bottom: 10px; text-align: left; font-size: 25px;">
+                Contact
+            </h1>
+            <p class="section-content-text">
+                Feel free to contact us at <strong>wuruiqi AT mail.nankai.edu.cn</strong> or <strong>wuruiqi AT megvii.com</strong>
+            </p>
+        </div>
+    </div>
+</div>
+<div style="background-color: white; margin-right: auto; margin-left: auto; text-align: center; padding-top: 35px; padding-bottom: 35px; position: absolute; left: 0; right: 0;">
+    <a href="https://www.freecounterstat.com" title="page view counter"><img style="position: relative; margin: auto; left: 0; right: 0;" src="https://counter6.optistats.ovh/private/freecounterstat.php?c=1thh4qucalbdnq4a3txmcutn1emlfswl" border="0" title="page view counter" alt="page view counter"></a>
+    <p>Visitor Count</p>
+</div>
+</body>
+
+<script>
+    window_height =  document.documentElement.clientHeight;
+    video_box = document.getElementById('video-box');
+    title_mask = document.getElementById('title-mask');
+    document.getElementsByTagName
+    imgs = video_box.getElementsByTagName('img');
+    console.log(String(window_height)+'px')
+    video_box.style.height = String(window_height)+'px'
+    title_mask.style.height = String(window_height)+'px'
+    for (i in imgs)
+    {
+        if (i < 64){
+            imgs[i].style.height = String(window_height/4)+'px';
+        }
+    }
+
+var scroll_btn = document.getElementById('scroll-btn');
+    scroll_btn.addEventListener("click",function(){
+        window.scrollTo({top:window_height+30, behavior: 'smooth'});
+    })
+</script>

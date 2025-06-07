@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors</title>
+  
+  <meta name="author" content="Ruiqi Wu">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="../projects.css">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../images/logo.png">
+</head>
+
+<body style="width: 100%;">
+    <div style="width: 100%;">
+        <!-- Title -->
+        <div class="root-content" style="padding-top: 30px;">
+            <name>RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors</name>
+            <br>
+            <div id="author-list"">
+                <a href="https://rq-wu.github.io">Rui-Qi Wu</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+                Zheng-Peng Duan<sup>1</sup>&nbsp;&nbsp;&nbsp;
+                <a href="https://scholar.google.com/citations?user=RZLYwR0AAAAJ&hl=en">Chun-Le Guo</a><sup>1,*</sup>&nbsp;&nbsp;&nbsp;
+                Zhi Chai<sup>2</sup>&nbsp;&nbsp;&nbsp;
+                <a href="https://li-chongyi.github.io/">Chong-Yi Li</a><sup>3</sup>&nbsp;&nbsp;&nbsp;
+            </div>
+            <div id="institution-list">
+                <sup>1</sup>VCIP, CS, Nankai University&nbsp;&nbsp;&nbsp;
+                <sup>2</sup>Hisilicon Technologies Co. Ltd.&nbsp;&nbsp;&nbsp;<br>
+                <sup>3</sup>S-Lab, Nanyang Technological University&nbsp;&nbsp;&nbsp;
+            </div>
+            <p id="publication">
+                CVPR 2023
+            </p>
+            <div id="button-list">
+                <span class="link-button">
+                    <a class="link-button-content", href="https://arxiv.org/abs/2304.03994", target="_blank">
+                        <span>
+                            <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                        </span>
+                        &nbsp;
+                        Paper
+                    </a>
+                </span>
+                <span class="link-button">
+                    <a class="link-button-content", href="https://arxiv.org/abs/2304.03994", target="_blank">
+                        <span>
+                            <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="position: relative; top: 0.15em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                        </span>
+                        &nbsp;  
+                        Supp (More Visual Results)
+                    </a>
+                </span>
+                <span class="link-button">
+                    <a class="link-button-content" href="https://github.com/RQ-Wu/RIDCP", target="_blank">
+                        <span>
+                            <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" version="1.1" viewBox="0 0 16 16" width="1.2em" style="position: relative; top: 0.25em;"><path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        </span>
+                        &nbsp; 
+                        Code + Pretrained Models
+                    </a>
+                </span>
+                <span class="link-button">
+                    <a class="link-button-content">
+                        <span>
+                            <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" style="position: relative; top: 0.25em;" width="1.2em"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google Colab</title><path fill="currentColor" fill-rule="evenodd" d="M16.9414 4.9757a7.033 7.033 0 0 0-4.9308 2.0646 7.033 7.033 0 0 0-.1232 9.8068l2.395-2.395a3.6455 3.6455 0 0 1 5.1497-5.1478l2.397-2.3989a7.033 7.033 0 0 0-4.8877-1.9297zM7.07 4.9855a7.033 7.033 0 0 0-4.8878 1.9316l2.3911 2.3911a3.6434 3.6434 0 0 1 5.0227.1271l1.7341-2.9737-.0997-.0802A7.033 7.033 0 0 0 7.07 4.9855zm15.0093 2.1721l-2.3892 2.3911a3.6455 3.6455 0 0 1-5.1497 5.1497l-2.4067 2.4068a7.0362 7.0362 0 0 0 9.9456-9.9476zM1.932 7.1674a7.033 7.033 0 0 0-.002 9.6816l2.397-2.397a3.6434 3.6434 0 0 1-.004-4.8916zm7.664 7.4235c-1.38 1.3816-3.5863 1.411-5.0168.1134l-2.397 2.395c2.4693 2.3328 6.263 2.5753 9.0072.5455l.1368-.1115z" fill="white"></path></svg>
+                        </span>
+                        &nbsp; 
+                        Colab Demo
+                    </a>
+                </span>
+                <span class="link-button">
+                    <a class="link-button-content", href="#bib">
+                        <span>
+                            <svg class="svg-inline--fa fa-file-pdf" aria-hidden="true" style="position: relative; top: 0.15em;" width="1em" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16"> <path fill="currentColor" fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" fill="white"></path> <path fill="currentColor" fill-rule="evenodd" d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" fill="white"></path> </svg>
+                        </span>
+                        &nbsp;  
+                        BibTex
+                    </a>
+                </span>
+            </div>
+        </div>
+        <!-- Visual Results -->
+        <div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto;">
+            <div class="root-content" style="padding-top: 10px;">
+                <h1 class="section-name">&#128293; Powerful Dehazing Ability on Real Images &#128293;</h1>
+                <p class="section-content-text">
+                    Our RIDCP achieves superior dehazing performance benefits from <strong>High-Quality Priors (HQPs) </strong> in the pre-trained codebook
+                    and the proposed <strong>Phenomenological Degradation Pipeline.</strong>
+                    Here are some typical dehazing cases.
+                </p>
+                <table style="border: 0px black solid; ">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; width: 340;text-align: left;"><iframe frameborder="0" class="juxtapose" height="455" width="300" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=6947e5e0-c8a8-11ed-b5bd-6595d9b17862"></iframe></td>
+                            <td style="padding: 10px; width: 340;text-align: center;"><iframe frameborder="0" class="juxtapose" height="455" width="339" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=5d95be06-c8a9-11ed-b5bd-6595d9b17862"></iframe></td>
+                            <td style="padding: 10px; width: 340;text-align: right;"><iframe frameborder="0" class="juxtapose" height="455" width="302" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=420e396e-c8aa-11ed-b5bd-6595d9b17862"></iframe></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="border: 0px black solid; border-top: 0;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; width:510; text-align: left;"><iframe frameborder="0" class="juxtapose" height="390" width="518" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=3080e84c-c8ad-11ed-b5bd-6595d9b17862"></iframe></td>
+                            <td style="padding: 10px; width:510; text-align: right;"><iframe frameborder="0" class="juxtapose" height="390" width="445" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=45271b70-c8a0-11ed-b5bd-6595d9b17862"></iframe></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h1 class="section-name">&#128400; Controllable Dehazing</h1>
+                <p class="section-content-text">
+                Our RIDCP allows users to adjust the enhancement degeree.
+                The novel <strong> Contorllable HQPs Matching </strong> mechanism can control the matching trends of HQPs.
+                </p>
+                <table style="border: 0px black solid;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 480px;text-align: left; padding-bottom: 5px;">
+                                <img id='origin_img' class='control-display' src='results_adjust/pumpkins_input.png' />
+                            </td>
+                            <td style="width: 485px; text-align: right; padding-bottom: 5px;">
+                                <img id='img' class='control-display' src='results_adjust/pumpkins_input_-20.0.png' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 0px; padding-bottom: 23px;">
+                                <strong style="font-size: 17px;">Hazy Image</strong>
+                            </td>
+                            <td style="padding-top: 0; padding-bottom: 23px;">
+                                <strong style="font-size: 17px;">Controllable Output</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input id='slider' type="range" min="0" max="240" value="160" step="1" />
+            </div>
+        </div>
+
+        <!-- Paper Information -->
+        <div class="root-content" style="padding-top: 30px;">
+            <div class="section-content">
+            <h1 class="section-name"> Abstract </h1>
+                <p class="section-content-text">
+                    Existing dehazing approaches struggle to process real-world hazy images owing to the lack of paired real data and robust priors. In this work, we present a new paradigm for real image dehazing from the perspectives of synthesizing more realistic hazy data and introducing more robust priors into the network. Specifically, (1) instead of adopting the de facto physical scattering model, we rethink the degradation of real hazy images and propose a phenomenological pipeline considering diverse degradation types. (2) We propose a Real Image Dehazing network via high-quality Codebook Priors (RIDCP). Firstly, a VQGAN is pre-trained on a large-scale high-quality dataset to obtain the discrete codebook, encapsulating high-quality priors (HQPs). After replacing the negative effects brought by haze with HQPs, the decoder equipped with a novel normalized feature alignment module can effectively utilize high-quality features and produce clean results. However, although our degradation pipeline drastically mitigates the domain gap between synthetic and real data, it is still intractable to avoid it, which challenges HQPs matching in the wild. Thus, we re-calculate the distance when matching the features to the HQPs by a controllable matching operation, which facilitates finding better counterparts. We provide a recommendation to control the matching based on an explainable solution. Users can also flexibly adjust the enhancement degree as per their preference. Extensive experiments verify the effectiveness of our data synthesis pipeline and the superior performance of RIDCP in real image dehazing. 
+                </p>
+            </div>
+
+            <div style="padding-top: 20px;">
+                <h1 class="section-name">Method</h1>
+                <img src="method.png" width="1000"/>
+                <p class="section-content-text">
+                    Overview of our RIDCP. 
+    During the training phase, we train the dehazing network on the data synthesized by our data generation pipeline, as illustrated in (a).
+    The network is based on the pre-trained HQPs codebook and the corresponding decoder $\mathbf{G}_{vq}$ of VQGAN.
+    We also design the Controllable HQPs Matching (CHM) operation for real domain adaptation by re-calculating the distance $d^{\hat{z}}_{k}=||\hat{z}-z_k||$ between features and HQPs.
+    (b) represents the distance re-calculation with two Voronoi diagrams, where the colored cells indicate belonging to better HQPs and the gray cells vice versa. Triangles represent features and star points represent HQPs. It can be seen that after the distance recalculation points that originally belonged to the gray cells are forced to be assigned to the colored cells by our CHM.
+                </p>
+            </div>
+
+            <div style="padding-top: 20px;">
+                <h1 class="section-name">
+                    Visual Comparisons
+                </h1>
+                <img src="result1.png" width="1000"/>
+                <img src="result2.png" width="998" style="margin-top: -4px;"/>
+            </div>
+
+            <div style="padding-top: 20px;">
+                <h1 class="section-name">Acknowledgements</h1>
+                <p class="section-content-text">This work is funded by the National Key Research and Development Program of China (NO.2018AAA0100400), Fundamental Research Funds for the Central Universities (Nankai University, NO.63223050), China Postdoctoral Science Foundation (NO.2021M701780). We are also sponsored by CAAI-Huawei MindSpore Open Fund.</p>
+            </div>
+
+            <div>
+                <h1 class="section-name" style="margin-top: 30px; text-align: left; font-size: 25px;">
+                    BibTex
+                </h1>
+                <a name="bib"></a>
+                <pre style="margin-top: 5px;" class="bibtex">
+                    <code>
+@inproceedings{wu2023ridcp,
+    title={RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors},
+    author={Wu, Ruiqi and Duan, Zhengpeng and Guo, Chunle and Chai, Zhi and Li, Chongyi},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    year={2023}
+}</code></pre>
+            </div>
+            <div style="margin-bottom: 50px;">
+                <h1 class="section-name" style="margin-top: 30px; margin-bottom: 10px; text-align: left; font-size: 25px;">
+                    Contact
+                </h1>
+                <p class="section-content-text">
+                    Feel free to contact us at <strong>wuruiqi@mail.nankai.edu.cn</strong>
+                </p>
+            </div>
+        </div>
+
+
+        <div style="background-color: #f5f5f5; margin-right: auto; margin-left: auto; text-align: center; padding-top: 35px; padding-bottom: 35px;">
+            <a href="https://www.freecounterstat.com" title="web page counter"><img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=xdafgsksdt68ssg1n7kfmr61ul4ugbb6" border="0" title="web page counter" alt="web page counter"></a>
+            <p>Visitor Count</p>
+        </div>
+    </div>
+</body>
+
+<script>
+    var img = document.getElementById('img');
+    var sliderbar = document.getElementById('slider');
+    slider.addEventListener('input', setImage);
+    var img_array = ['results_adjust/pumpkins_input_60.0.png',
+                      'results_adjust/pumpkins_input_50.0.png',
+                      'results_adjust/pumpkins_input_40.0.png',
+                      'results_adjust/pumpkins_input_30.0.png',
+                      'results_adjust/pumpkins_input_10.0.png',
+                      'results_adjust/pumpkins_input_20.0.png',
+                      'results_adjust/pumpkins_input_0.0.png',
+                      'results_adjust/pumpkins_input_-10.0.png',
+                      'results_adjust/pumpkins_input_-20.0.png',
+                      'results_adjust/pumpkins_input_-30.0.png',
+                      'results_adjust/pumpkins_input_-40.0.png',
+                      'results_adjust/pumpkins_input_-50.0.png',
+                      'results_adjust/pumpkins_input_-60.0.png',];
+    function setImage(e)
+    {
+        var {value, max} = e.target;
+        img.src = img_array[parseInt(value/20)];
+    }
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$']]},
+        messageStyle: "none"
+    });
+</script>
