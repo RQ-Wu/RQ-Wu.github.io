@@ -5,6 +5,7 @@
   <title>DIPO: Dual-State Images Controlled Articulated Object Generation Powered by Diverse Data</title>
   
   <meta name="author" content="Ruiqi Wu">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   
@@ -292,7 +293,7 @@
           </a>
         </span>
         <span class="link-button">
-          <a class="link-button-content" href="#" target="_blank">
+          <a class="link-button-content" href="https://github.com/RQ-Wu/DIPO" target="_blank">
             <span>💻</span>
             &nbsp; 
             Code
@@ -349,35 +350,24 @@
             ▶
           </button>
         </div>
-
-        <h1 class="section-name">🔧 LEGO-Art Pipeline: Building Complex Articulated Objects</h1>
-        <div class="pipeline-flow">
-          <div class="pipeline-step">
-            <strong>Description Roller</strong><br>
-            Natural Language
-          </div>
-          <span class="arrow">→</span>
-          <div class="pipeline-step">
-            <strong>Layout Builder</strong><br>
-            Grid Occupancy
-          </div>
-          <span class="arrow">→</span>
-          <div class="pipeline-step">
-            <strong>Scripting Toolkit</strong><br>
-            Precise Coordinates
-          </div>
-          <span class="arrow">→</span>
-          <div class="pipeline-step">
-            <strong>Retrieval & Render</strong><br>
-            3D Object + Images
-          </div>
-          <span class="arrow">→</span>
-          <div class="pipeline-step">
-            <strong>Visual Filter</strong><br>
-            Quality Check
-          </div>
-        </div>
       </div>
+
+        <h1 class="section-name">🔧 PM-X Dataset: Building Complex Articulated Objects</h1>
+        <div class="relative w-full max-w-5xl mx-auto" style="margin-top: 5px; padding-bottom: 40px;">
+          <button id="prevBtn-lego" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow z-10" style="position: absolute; left: -50px; top: 40%; box-shadow: 0 0px 10px #1976d271; border: 1px solid #1976D2;">
+            ◀
+          </button>
+          <!-- Slide Viewport -->
+          <div class="overflow-hidden">
+            <div id="legoSlide" class="flex transition-transform duration-500">
+              <!-- Cards inserted by JS -->
+            </div>
+          </div>
+
+          <button id="nextBtn-lego" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow z-10" style="position: absolute; right: -50px; top: 40%; box-shadow: 0 0 10px #1976d271; border: 1px solid #1976D2;">
+            ▶
+          </button>
+        </div>
     </div>
 
     <!-- Paper Information -->
@@ -410,20 +400,6 @@
         </p>
         <img class="method-image" src="LEGO.png" alt="Method Overview">
         
-        <div class="result-grid">
-          <div class="result-item">
-            <img src="https://via.placeholder.com/300x300/e3f2fd/1976d2?text=Storage+Furniture" alt="PM-X Example 1">
-            <p>Complex Storage Furniture</p>
-          </div>
-          <div class="result-item">
-            <img src="https://via.placeholder.com/300x300/e8f5e9/4caf50?text=Multi-Drawer+Cabinet" alt="PM-X Example 2">
-            <p>Multi-Drawer Cabinet</p>
-          </div>
-          <div class="result-item">
-            <img src="https://via.placeholder.com/300x300/fff3e0/ff9800?text=Articulated+Table" alt="PM-X Example 3">
-            <p>Articulated Table</p>
-          </div>
-        </div>
       </div>
 
       <div style="padding-top: 20px;">
@@ -547,100 +523,57 @@
     });
     const sampleData = [
     {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      dualImages: ["vis_result/0/close.png", "vis_result/0/open.png"],
       sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+        "vis_result/0/supp_animation_0.png",
+        "vis_result/0/supp_animation_1.png",
+        "vis_result/0/supp_animation_2.png",
+        "vis_result/0/supp_animation_3.png",
+        "vis_result/0/supp_animation_4.png",
+        "vis_result/0/supp_animation_5.png",
+        "vis_result/0/supp_animation_6.png",
+        "vis_result/0/supp_animation_7.png"
       ],
     },
     {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      dualImages: ["vis_result/1/close.png", "vis_result/1/open.png"],
       sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+        "vis_result/1/supp_animation_0.png",
+        "vis_result/1/supp_animation_1.png",
+        "vis_result/1/supp_animation_2.png",
+        "vis_result/1/supp_animation_3.png",
+        "vis_result/1/supp_animation_4.png",
+        "vis_result/1/supp_animation_5.png",
+        "vis_result/1/supp_animation_6.png",
+        "vis_result/1/supp_animation_7.png"
       ],
     },
     {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      dualImages: ["vis_result/2/close.png", "vis_result/2/open.png"],
       sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+        "vis_result/2/supp_animation_0.png",
+        "vis_result/2/supp_animation_1.png",
+        "vis_result/2/supp_animation_2.png",
+        "vis_result/2/supp_animation_3.png",
+        "vis_result/2/supp_animation_4.png",
+        "vis_result/2/supp_animation_5.png",
+        "vis_result/2/supp_animation_6.png",
+        "vis_result/2/supp_animation_7.png"
       ],
     },
     {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
+      dualImages: ["vis_result/3/close.png", "vis_result/3/open.png"],
       sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
+        "vis_result/3/supp_animation_0.png",
+        "vis_result/3/supp_animation_1.png",
+        "vis_result/3/supp_animation_2.png",
+        "vis_result/3/supp_animation_3.png",
+        "vis_result/3/supp_animation_4.png",
+        "vis_result/3/supp_animation_5.png",
+        "vis_result/3/supp_animation_6.png",
+        "vis_result/3/supp_animation_7.png"
       ],
-    },
-    {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
-      sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
-      ],
-    },
-    {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
-      sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
-      ],
-    },
-    {
-      dualImages: ["/images/item2_rest.png", "/images/item2_open.png"],
-      sequence: [
-        "/images/item2_seq/0.png",
-        "/images/item2_seq/1.png",
-        "/images/item2_seq/2.png",
-        "/images/item2_seq/3.png",
-      ],
-    },
-    {
-      dualImages: ["/images/item3_rest.png", "/images/item3_open.png"],
-      sequence: [
-        "/images/item3_seq/0.png",
-        "/images/item3_seq/1.png",
-        "/images/item3_seq/2.png",
-        "/images/item3_seq/3.png",
-      ],
-    },
-    {
-      dualImages: ["../RIDCP/results_adjust/pumpkins_input_-10.0.png", "../RIDCP/results_adjust/pumpkins_input_-10.0.png"],
-      sequence: [
-        "../RIDCP/results_adjust/pumpkins_input_0.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_10.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_20.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_30.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_40.0.png",
-        "../RIDCP/results_adjust/pumpkins_input_50.0.png"
-      ],
-    },
+    }
   ];
 
   let currentPage = 0;
@@ -664,7 +597,7 @@
             <img src="${item.dualImages[1]}" class="w-full aspect-square object-contain rounded shadow" />
           </div>
           <div class="col-span-2 flex flex-col items-center space-y-4">
-            <img id="${imgId}" src="${item.sequence[0]}" class="w-full aspect-square object-contain rounded shadow" />
+            <img id="${imgId}" src="${item.sequence[0]}" class="w-full aspect-square object-contain rounded shadow" style="filter: saturate(2.5);" />
             <input id="${sliderId}" type="range" min="0" max="${item.sequence.length - 1}" value="0" class="w-3/4" />
           </div>
         </div>
@@ -706,6 +639,124 @@
     slide();
   });
 
+  function preloadImages() {
+    for (const item of sampleData) {
+      for (const src of item.sequence) {
+        const img = new Image();
+        img.src = src;
+      }
+    }
+  }
+
+  const legoCases = [
+    {
+      label: "A storage furniture with two doors on the top, three drawers in the middle, and one drawer at the bottom.",
+      imgs: [
+        "pm_result/0/gt_0.png",
+        "pm_result/0/gt_1.png",
+        "pm_result/0/vis_img.png"
+      ]
+    },
+    {
+      label: "A storage furniture with four doors on the top, three drawers in the middle, and six drawers at the bottom arranged in two columns.",
+      imgs: [
+        "pm_result/1/gt_0.png",
+        "pm_result/1/gt_1.png",
+        "pm_result/1/vis_img.png"
+      ]
+    },
+    {
+      label: "A storage furniture with two large doors at the top, eight small drawers in the middle arranged in two columns of four, and one wide drawer at the bottom.",
+      imgs: [
+        "pm_result/2/gt_0.png",
+        "pm_result/2/gt_1.png",
+        "pm_result/2/vis_img.png"
+      ]
+    },
+    {
+      label: "A storage furniture with three drawers on the left side, two doors in the middle, and one drawer at the bottom.",
+      imgs: [
+        "pm_result/3/gt_0.png",
+        "pm_result/3/gt_1.png",
+        "pm_result/3/vis_img.png"
+      ]
+    },
+    {
+      label: "A table with one drawer in the middle, two drawers on the left side, and one drawer on the right side.",
+      imgs: [
+        "pm_result/4/gt_0.png",
+        "pm_result/4/gt_1.png",
+        "pm_result/4/vis_img.png"
+      ]
+    },
+    {
+      label: "A table with a base, eight drawers evenly distributed on both sides, and one large drawer in the middle just beneath the tabletop.",
+      imgs: [
+        "pm_result/5/gt_0.png",
+        "pm_result/5/gt_1.png",
+        "pm_result/5/vis_img.png"
+      ]
+    },
+    // 可继续添加更多 case
+  ];
+
+  
+  function renderLegoPage() {
+    const container = document.getElementById("legoSlide");
+    container.innerHTML = "";
+  
+    const start = 0;
+    const end = legoCases.length;
+  
+    for (let i = start; i < end; i++) {
+      const c = legoCases[i];
+  
+      const card = document.createElement("div");
+      card.className = "card"; // 每页两个 case
+  
+      card.innerHTML = `
+        <div class="bg-white p-4 rounded-xl shadow" style="height:260px;">
+          <div class="flex gap-4 mb-2">
+            ${c.imgs.map(src => `
+              <img src="${src}" 
+                   class="object-contain rounded shadow box-border max-h-48"
+                   style="width: 31%">
+            `).join("")}
+          </div>
+          <p class="text-center text-sm text-gray-600 mt-2" style="width: 80%; text-align: center; position:relative; left: 10%; top:10px; font-family: 'Comic Sans MS', cursive, sans-serif;"><strong>${c.label}</strong></p>
+        </div>
+      `;
+  
+      container.appendChild(card);
+    }
+  
+    // 关键：container 就是 legoSlide 本身
+    container.style.transform = `translateX(-${legoCurrentPage * 100}%)`;
+  }
+
+  let legoCurrentPage = 0;
+  const legoItemsPerPage = 2; // 两个case一页
+  const legoMaxPage = Math.ceil(legoCases.length / legoItemsPerPage);
+
+  document.getElementById("nextBtn-lego").addEventListener("click", () => {
+    legoCurrentPage = (legoCurrentPage + 1) % (legoMaxPage);
+    console.log(legoCurrentPage);
+    renderLegoPage();
+    slide();
+  });
+
+  document.getElementById("prevBtn-lego").addEventListener("click", () => {
+    legoCurrentPage = (legoCurrentPage - 1) % (legoMaxPage);
+    if (currentPage < 0) {
+      legoCurrentPage = legoMaxPage - 1;
+    } 
+    console.log(legoCurrentPage);
+    renderLegoPage();
+    slide();
+  });
+  
+  renderLegoPage();
+  preloadImages();
   renderPage();
 </script>
 
