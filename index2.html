@@ -1,605 +1,744 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rui-Qi Wu - Academic Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary: #1a73e8;
-      --secondary: #34a853;
-      --surface: #ffffff;
-      --background: #f8f9fa;
-      --text: #2d2d2d;
-      --card-bg: #ffffff;
-      --shadow: rgba(0, 0, 0, 0.06);
-      --accent: #67a0ff;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.5;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      color: var(--text);
-      padding: 1rem;
-      font-size: 14px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border-radius: 18px;
-      box-shadow: 0 12px 36px var(--shadow);
-      padding: 2rem;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 2rem;
-      align-items: start;
-      margin-bottom: 2rem;
-    }
-    .profile-image {
-      width: 180px;
-      height: 240px;
-      border-radius: 18px;
-      object-fit: cover;
-      /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06); */
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .hero-content h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      position: relative;
-    }
-    .hero-content h1::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 80px;
-      height: 4px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-    .hero-content p {
-      margin: 0.5rem 0;
-      color: #5f6368;
-      font-size: 0.9rem;
-    }
-    .social-links {
-      display: flex;
-      gap: 1.25rem;
-      margin: 1.5rem 0;
-    }
-    .social-link {
-      color: var(--text);
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      background: rgba(26, 115, 232, 0.08);
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      overflow: hidden;
-    }
-    .social-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--primary);
-      z-index: -1;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transform-origin: left;
-      transform: scaleX(0);
-    }
-    .social-link:hover {
-      color: white;
-      transform: translateX(6px);
-    }
-    .social-link:hover::before {
-      transform: scaleX(1);
-    }
-    .section {
-      margin-bottom: 2.5rem;
-    }
-    .section-header {
-      position: relative;
-      margin-bottom: 1.5rem;
-      padding: 0.75rem 0;
-    }
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      display: inline-block;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    .section-title::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 40px;
-      height: 3px;
-      background: var(--primary);
-      transition: width 0.3s ease;
-      border-radius: 1.5px;
-    }
-    .section-title:hover::before {
-      width: 80px;
-    }
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 0.5fr);
-      gap: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .news-card {
-      background: var(--surface);
-      border-radius: 14px;
-      padding: 1.25rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      overflow: hidden;
-    }
-    .news-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(26,115,232,0.1) 0%, rgba(52,168,83,0.1) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1;
-    }
-    .news-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
-    }
-    .news-card:hover::before {
-      opacity: 1;
-    }
-    .news-date {
-      font-weight: 600;
-      color: var(--secondary);
-      margin-bottom: 0.75rem;
-      position: relative;
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      background: rgba(52, 168, 83, 0.1);
-    }
-    .news-list {
-      list-style: none;
-      max-height: 300px;
-      overflow-y: auto;
-      border-top: 2px solid #eee;
-      padding: 1.25rem 0;
-    }
-    .news-list::-webkit-scrollbar {
-      width: 8px;
-    }
-    .news-list::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-    .news-list::-webkit-scrollbar-thumb {
-      background: #c1c1c1;
-      border-radius: 10px;
-    }
-    .news-item {
-      padding: 0.475rem 0;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    .news-item:last-child {
-      border-bottom: none;
-    }
-    .news-item:hover {
-      background: rgba(26, 115, 232, 0.05);
-      transform: translateX(8px);
-    }
-    .news-item-date {
-      flex-shrink: 0;
-      font-weight: 600;
-      color: var(--secondary);
-      min-width: 120px;
-      position: relative;
-    }
-    .news-item-date::after {
-      content: '';
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 4px;
-      background: var(--secondary);
-      border-radius: 50%;
-    }
-    .news-item-content h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-    .news-item-content p {
-      margin: 0;
-      color: #666;
-      font-size: 0.875rem;
-    }
-    .publications-list {
-      list-style: none;
-      display: grid;
-      gap: 1.5rem;
-    }
-    .publication-item {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 1.25rem;
-      padding: 1.25rem;
-      background: var(--surface);
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      overflow: hidden;
-    }
-    .publication-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(26,115,232,0.1) 0%, rgba(52,168,83,0.1) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1;
-    }
-    .publication-item:hover {
-      transform: translateX(-8px) scale(1.02);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
-    }
-    .publication-item:hover::before {
-      opacity: 1;
-    }
-    .pub-thumbnail {
-      width: 280px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease;
-    }
-    .pub-thumbnail:hover {
-      transform: scale(1.05);
-    }
-    .pub-title {
-      font-size: 1.25rem;   
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      transition: color 0.3s ease;
-    }
-    .pub-title:hover {
-      color: var(--primary);
-      text-decoration: underline;
-    }
-    .pub-authors {
-      color: #666;
-      margin-bottom: 1rem;
-      font-size: 0.875rem;
-    }
-    .pub-links {
-      display: flex;
-      gap: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-    .pub-links a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-      font-size: 0.875rem;
-      position: relative;
-      padding: 0.25rem 0;
-    }
-    .pub-links a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: width 0.3s ease;
-    }
-    .pub-links a:hover::after {
-      width: 100%;
-    }
-    .awards-section {
-      margin-top: 2rem;
-    }
-    .award-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid #eee;
-      transition: all 0.3s ease;
-    }
-    .award-item:hover {
-      background: rgba(26, 115, 232, 0.05);
-      transform: translateX(8px);
-    }
-    .award-item:last-child {
-      border-bottom: none;
-    }
-    .award-icon {
-      color: var(--secondary);
-      font-size: 1.2rem;
-    }
-    .award-content {
-      flex: 1;
-    }
-    .award-title {
-      font-weight: 600;
-      color: var(--text);
-    }
-    .award-description {
-      color: #666;
-      font-size: 0.875rem;
-    }
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
+    <meta charset="UTF-8">
+    <meta name="author" content="Ruiqi Wu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rui-Qi Wu</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 - 苹果风格基调 */
+        :root {
+            --apple-white: #f9f9f9;
+            --apple-gray-light: #e8e8ed;
+            --apple-gray: #d2d2d7;
+            --apple-gray-dark: #86868b;
+            --apple-text: #1d1d1f;
+            --apple-accent: #0071e3;
+            --apple-red: #ff3b30;
+            --apple-orange: #ff9500;
+            --shadow-light: 0 1px 3px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
+            --shadow-medium: 0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+            --radius-small: 8px;
+            --radius-medium: 12px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            
+            /* ===== iOS Liquid Glass 基础变量 ===== */
+            --lg-blur: 14px;                 /* 背景虚化 */
+            --lg-opacity: 0.85;              /* 玻璃透明度 */
+            --lg-border: rgba(255,255,255,0.28);
+            --lg-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            --lg-tint: 255,255,255;          /* 玻璃色调（白玻璃） */
+            --lg-highlight: rgba(255,255,255,0.9);  /* 斜向高光 */
+            --lg-inner-shadow: rgba(0,0,0,0.12);    /* 内阴影 */
+            --lg-specular: rgba(255,255,255,0.65);  /* 高光点 */
+            --lg-sat: 1.2;                   /* 饱和度微提升 */
+            --lg-border-width: 1px;
+            --lg-radius: 18px;
+
+            /* “液体”微动强度与速度 */
+            --lg-distortion: 12;              /* SVG 位移强度(px) */
+            --lg-flow-speed: 22s;            /* 噪声流动周期 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--apple-white);
+            color: var(--apple-text);
+            line-height: 1.6;
+            padding: 20px 0;
+            /* 背景纹理增强玻璃效果对比 */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 113, 227, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 113, 227, 0.03) 0%, transparent 20%);
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--radius-medium);
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 25px;
+            border-bottom: 1px solid var(--apple-gray-light);
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-name i {
+            margin-right: 10px;
+            color: var(--apple-accent);
+        }
+
+        .social-links {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: var(--apple-accent);
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links i {
+            margin-right: 5px;
+        }
+
+        .profile-bio {
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            text-align: justify;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .profile-photo {
+            flex: 0 0 auto;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 20px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* 章节通用样式 */
+        section {
+            padding: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--apple-text);
+        }
+
+        .section-title i {
+            font-size: 28px;
+            margin-right: 12px;
+            color: var(--apple-accent);
+        }
+
+        /* 新闻列表样式 */
+        .news-list {
+            padding-left: 40px;
+        }
+
+        .news-list li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .news-date {
+            color: var(--apple-red);
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .news-highlight {
+            color: var(--apple-orange);
+            font-weight: 500;
+        }
+
+        /* 出版物样式 */
+        .publication-note {
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: var(--apple-gray-dark);
+        }
+
+        .pub-category {
+            margin: 10px 0 20px 20px;
+            padding-bottom: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 2px dashed var(--apple-gray);
+            max-width: 680px;
+        }
+
+        .publication {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        /* ===== 可复用液体玻璃容器 ===== */
+        .liquid-glass {
+            position: relative;
+            border-radius: var(--lg-radius);
+            overflow: hidden;
+            isolation: isolate;                      /* 确保层叠正确 */
+            box-shadow: var(--lg-shadow);
+            /* 基础玻璃材质（颜色 + 虚化 + 饱和） */
+            background: rgba(var(--lg-tint), var(--lg-opacity));
+            -webkit-backdrop-filter: saturate(var(--lg-sat)) blur(var(--lg-blur));
+            backdrop-filter: saturate(var(--lg-sat)) blur(var(--lg-blur));
+            border: var(--lg-border-width) solid var(--lg-border);
+            transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s;
+        }
+
+        /* 悬停增强（桌面端） */
+        @media (hover:hover) {
+            .liquid-glass:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 16px 60px rgba(0,0,0,0.16);
+            }
+        }
+
+        /* ===== 斜向“扫光”层（细微移动的高光带） ===== */
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            pointer-events: none;
+            background:
+                radial-gradient(120% 60% at 0% 0%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.0) 60%) ,
+                linear-gradient(120deg, transparent 40%, var(--lg-highlight) 50%, transparent 60%);
+            mix-blend-mode: screen;
+            animation: lgSweep var(--lg-flow-speed) linear infinite;
+        }
+
+        @keyframes lgSweep {
+            0%   { transform: translateX(-10%) rotate(20deg); }
+            100% { transform: translateX(10%)  rotate(20deg); }
+        }
+
+        /* ===== 内阴影+描边提质（边缘更“厚重”像真实玻璃） ===== */
+        .liquid-glass::after {
+            content: "";
+            position: absolute; inset: 0;
+            pointer-events: none;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), inset 0 -20px 40px rgba(0,0,0,0.06);
+            /* 叠加 SVG 折射，制造“液体”轻微波动的错切/折射感 */
+            filter: url(#lg-distort);
+        }
+
+        /* ===== 高光点（可选：像 iOS 控件上的点状高光） ===== */
+        .lg-specular-dot {
+            position: absolute;
+            top: 10px; right: 14px;
+            width: 36px; height: 18px;
+            pointer-events: none;
+            background: radial-gradient(60% 140% at 30% 20%, var(--lg-specular) 0%, rgba(255,255,255,0.0) 70%);
+            filter: blur(1.2px);
+            opacity: .9;
+        }
+
+        /* ===== 降动效与兼容性处理 ===== */
+        @media (prefers-reduced-motion: reduce) {
+            .liquid-glass::before { animation: none; }
+        }
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .liquid-glass {
+                /* 降级：用半透明+边框+阴影替代 */
+                background: rgba(var(--lg-tint), 0.85);
+            }
+        }
+
+        .pub-image {
+          flex: 0 0 240px;        /* 固定宽度 */
+          height: 160px;          /* 固定高度，例如16:10比例 */
+          margin-right: 20px;
+          position: relative;
+          border-radius: var(--radius-small);
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: var(--transition);
+          z-index: 1;
       }
-      .publication-item {
-        grid-template-columns: 1fr;
+
+      .pub-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;      /* 图片铺满并裁切 */
+          display: block;
       }
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
-      .news-item {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .news-item-date {
-        margin-bottom: 0.5rem;
-      }
-      .award-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+
+
+        .pub-image .hover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .pub-image:hover .hover-image {
+            opacity: 1;
+        }
+
+        .pub-content {
+            flex: 1;
+            min-width: 300px;
+            z-index: 1; /* 确保内容在光效之上 */
+        }
+
+        .pub-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--apple-text);
+        }
+
+        .pub-authors {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .pub-authors strong {
+            color: var(--apple-accent);
+        }
+
+        .pub-venue {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: var(--apple-gray-dark);
+        }
+
+        .pub-badges img {
+            position: relative;
+            top: 4px;
+            height: 18px;
+            margin-left: 8px;
+        }
+
+        .pub-links {
+            margin-top: 15px;
+        }
+
+        .pub-links a {
+            color: var(--apple-accent);
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: 12px;
+            transition: var(--transition);
+        }
+
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 荣誉奖项样式 */
+        .awards-list {
+            padding-left: 40px;
+        }
+
+        .awards-list li {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .awards-list a {
+            color: var(--apple-accent);
+            text-decoration: none;
+        }
+
+        .awards-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--apple-gray-light);
+            font-size: 12px;
+            color: var(--apple-gray-dark);
+        }
+
+        .clustrmaps-widget {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+
+            .profile-bio {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+
+            .publication {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .pub-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+                width: 100%;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .news-list, .awards-list {
+                padding-left: 25px;
+            }
+
+            section {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Hero Section -->
-    <section class="hero">
-      <img src="images/my.jpg" 
-           alt="Profile" class="profile-image" />
-      <div class="hero-content">
-        <h1>Rui-Qi Wu (武睿祺)</h1>
-        <p>Rui-Qi Wu is a PhD candidate of TMCC, College of Computer Science, Nankai University, under the supervision of Prof. Ming-Ming Cheng. He received the B.E. degree from Wuhan University of Technology (WHUT) in 2022. His research interests are in computer vision and machine learning, with a particular focus on AIGC.
-        </p>
-        <div class="social-links">
-          <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" class="social-link">Google Scholar</a>
-          <a href="https://github.com/RQ-Wu" class="social-link">GitHub</a>
-          <a href="https://www.zhihu.com/people/hou-ban-lu-shui" class="social-link">Zhihu</a>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Recent News -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">Recent News</h2>
-      </div>
-      <div class="news-grid">
-        <div class="news-card">
-          <div class="news-date">Jul 2024</div>
-          <h3>One paper accepted by ECCV 2024</h3>
-        </div>
-        <div class="news-card">
-          <div class="news-date">Feb 2024</div>
-          <h3>One paper accepted by CVPR 2024</h3>
-        </div>
-        <div class="news-card">
-          <div class="news-date">Nov 2023</div>
-          <h3>Served as reviewer for CVPR 2024</h3>
-        </div>
-      </div>
-      <ul class="news-list">
-        <li class="news-item">
-          <div class="news-item-date">Sep 2023</div>
-          <div class="news-item-content">
-            <h3>Served as reviewer for IEEE TPAMI and TCSVT</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Jul 2023</div>
-          <div class="news-item-content">
-            <h3>Served as reviewer for AAAI 2024</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Mar 2023</div>
-          <div class="news-item-content">
-            <h3>One paper accepted by IEEE TMM</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Feb 2023</div>
-          <div class="news-item-content">
-            <h3>One paper accepted by CVPR 2023</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Jan 2023</div>
-          <div class="news-item-content">
-            <h3>AAAI 2023 paper awarded Oral Presentation</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Dec 2022</div>
-          <div class="news-item-content">
-            <h3>Served as reviewer for Neurocomputing</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Nov 2022</div>
-          <div class="news-item-content">
-            <h3>One paper accepted by AAAI 2023</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Apr 2022</div>
-          <div class="news-item-content">
-            <h3>Third Place in Megcup 2022 RAW Image De-noising</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Apr 2022</div>
-          <div class="news-item-content">
-            <h3>Second Runner-up in CVPRW 2022 Night Photography Challenge</h3>
-          </div>
-        </li>
-        <li class="news-item">
-          <div class="news-item-date">Mar 2021</div>
-          <div class="news-item-content">
-            <h3>ICME 2021 paper accepted as Oral Presentation</h3>
-          </div>
-        </li>
-      </ul>
-    </section>
-    
-    <!-- Publications -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">Publications</h2>
-      </div>
-      <ul class="publications-list">
-        <li class="publication-item">
-          <img src="images/LAMP/LOGO.png" alt="LAMP" class="pub-thumbnail" />
-          <div>
-            <h3 class="pub-title">LAMP: Learn A Motion Pattern for Few-Shot Video Generation</h3>
-            <div class="pub-authors">Rui-Qi Wu, Liang-Yu Chen, Tong Yang, Chun-Le Guo, Chong-Yi Li, Xiang-Yu Zhang</div>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2310.10769">PDF</a>
-              <a href="https://rq-wu.github.io/projects/LAMP/index.html">Project</a>
-              <a href="https://github.com/RQ-Wu/LAMP">Code</a>
-              <a href="bibs/LAMP.html">BibTex</a>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header>
+            <div class="profile-info">
+                <div class="profile-name">
+                    <i class="fas fa-user-circle"></i>
+                    Rui-Qi Wu (武睿祺)
+                </div>
+                <div class="social-links">
+                    <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" target="_blank">
+                        <i class="fab fa-google"></i> Google Scholar
+                    </a>
+                    <a href="https://github.com/RQ-Wu" target="_blank">
+                        <i class="fab fa-github"></i> Github
+                    </a>
+                    <a href="https://www.zhihu.com/people/hou-ban-lu-shui" target="_blank">
+                        <i class="fab fa-zhihu"></i> Zhihu (知乎)
+                    </a>
+                </div>
+                <p class="profile-bio">
+                    Rui-Qi Wu is a PhD candidate of <a href="https://mmcheng.net/cmm/" target="_blank">TMCC</a>, 
+                    College of Computer Science, Nankai University, under the supervision of Prof. Ming-Ming Cheng. 
+                    He received the B.E. degree from Wuhan University of Technology (WHUT) in 2022. 
+                    His research interests are in computer vision and machine learning, with a particular focus on AIGC.
+                </p>
             </div>
-          </div>
-        </li>
-        <li class="publication-item">
-          <img src="images/RIDCP/dehaze.gif" alt="RIDCP" class="pub-thumbnail" />
-          <div>
-            <h3 class="pub-title">RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors</h3>
-            <div class="pub-authors">Rui-Qi Wu, Zheng-Peng Duan, Chun-Le Guo, Zhi Chai, Chong-Yi Li</div>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2304.03994">PDF</a>
-              <a href="projects/RIDCP/index.html">Project</a>
-              <a href="https://github.com/RQ-Wu/RIDCP">Code</a>
-              <a href="bibs/RIDCP.html">BibTex</a>
+            <div class="profile-photo">
+                <a href="images/my.jpg">
+                    <img src="images/my.jpg" alt="profile photo">
+                </a>
             </div>
-          </div>
-        </li>
-        <li class="publication-item">
-          <img src="images/URanker/main.png" alt="Underwater Ranker" class="pub-thumbnail" />
-          <div>
-            <h3 class="pub-title">Underwater Ranker: Learn Which Is Better and How to Be Better</h3>
-            <div class="pub-authors">Chun-Le Guo*, Rui-Qi Wu*, Xin Jin, Ling-Hao Han, Zhi Chai, Wei-Dong Zhang, Chong-Yi Li</div>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2208.06857">PDF</a>
-              <a href="https://li-chongyi.github.io/URanker_files/">Project</a>
-              <a href="https://github.com/RQ-Wu/UnderwaterRanker">Code</a>
-              <a href="bibs/underwater_ranker.html">BibTex</a>
+        </header>
+
+        <!-- 最新动态区域 -->
+        <section id="news">
+            <h2 class="section-title">
+                <i class="fas fa-sun"></i> Recent News
+            </h2>
+            <ul class="news-list">
+                <li><span class="news-date">[07/2024]</span> One paper is accepted by ECCV 2024.</li>
+                <li><span class="news-date">[02/2024]</span> One paper is accepted by CVPR 2024.</li>
+                <li><span class="news-date">[11/2023]</span> I have served as a reviewer for CVPR 2024.</li>
+                <li><span class="news-date">[09/2023]</span> I have served as a reviewer for <strong>IEEE TPAMI</strong> (IF: 24.314) and IEEE TCSVT (IF: 5.859).</li>
+                <li><span class="news-date">[07/2023]</span> I have served as a reviewer for AAAI 2024.</li>
+                <li><span class="news-date">[03/2023]</span> One paper was accepted by IEEE TMM.</li>
+                <li><span class="news-date">[02/2023]</span> One paper was accepted by CVPR 2023.</li>
+                <li><span class="news-date">[01/2023]</span> Our paper was awarded <span class="news-highlight">Oral Presentation</span> qualification by AAAI 2023.</li>
+                <li><span class="news-date">[12/2022]</span> I have served as a reviewer for Neurocomputing (IF: 5.719).</li>
+                <li><span class="news-date">[11/2022]</span> One paper was accepted by AAAI 2023.</li>
+                <li><span class="news-date">[04/2022]</span> Our team won the <span class="news-highlight">Third Place</span> in RAW Image Blind De-noising, Megcup 2022.</li>
+                <li><span class="news-date">[04/2022]</span> Our team won the <span class="news-highlight">Second Runner-up</span> in Night Photography Rendering Challenge, CVPRW 2022.</li>
+                <li><span class="news-date">[03/2021]</span> One paper is accepted by ICME 2021 as <span class="news-highlight">Oral Presentation</span>.</li>
+            </ul>
+        </section>
+
+        <!-- 出版物区域 -->
+        <section id="publications">
+            <h2 class="section-title">
+                <i class="fas fa-book"></i> Publications
+            </h2>
+            <p class="publication-note">( * denotes contribution equally )</p>
+            
+            <div class="pub-category">First author paper</div>
+
+            <!-- LAMP 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/LAMP/LOGO.png" alt="LAMP">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">LAMP: Learn A Motion Pattern for Few-Shot Video Generation</h3>
+                    <p class="pub-authors"><strong>Rui-Qi Wu</strong>, Liang-Yu Chen, Tong Yang, Chun-Le Guo, Chong-Yi Li, Xiang-Yu Zhang</p>
+                    <p class="pub-venue">CVPR 2024
+                        <img src="https://img.shields.io/github/stars/RQ-Wu/LAMP?label=%F0%9F%8C%9F%20Star&color=blue" alt="Stars">
+                        <img src="https://img.shields.io/github/forks/RQ-Wu/LAMP?label=%F0%9F%94%A7%20Fork&color=green" alt="Forks">
+                    </p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2310.10769" target="_blank">PDF</a>
+                        <a href="https://rq-wu.github.io/projects/LAMP/index.html" target="_blank">Project</a>
+                        <a href="https://github.com/RQ-Wu/LAMP" target="_blank">Code</a>
+                        <a href="bibs/LAMP.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </li>
-        <li class="publication-item">
-          <img src="images/StereoSuperpixel/ICME.png" alt="ICME" class="pub-thumbnail" />
-          <div>
-            <h3 class="pub-title">Stereo Superpixel Segmentation Via Dual-Attention Fusion Networks</h3>
-            <div class="pub-authors">Rui-Qi Wu, Ya-Juan Du, Hua Li, Yu-Cong Dai</div>
-            <div class="pub-links">
-              <a href="https://ieeexplore.ieee.org/abstract/document/9428302">PDF</a>
-              <a href="bibs/ICME.html">BibTex</a>
+
+            <!-- RIDCP 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/RIDCP/dehaze.gif" alt="RIDCP">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">RIDCP: Revitalizing Real Image Dehazing via High-Quality Codebook Priors</h3>
+                    <p class="pub-authors"><strong>Rui-Qi Wu</strong>, Zheng-Peng Duan, Chun-Le Guo, Zhi Chai, Chong-Yi Li</p>
+                    <p class="pub-venue">CVPR 2023
+                        <img src="https://img.shields.io/github/stars/RQ-Wu/RIDCP_dehazing?label=%F0%9F%8C%9F%20Star&color=blue" alt="Stars">
+                        <img src="https://img.shields.io/github/forks/RQ-Wu/RIDCP_dehazing?label=%F0%9F%94%A7%20Fork&color=green" alt="Forks">
+                    </p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2304.03994" target="_blank">PDF</a>
+                        <a href="#">中文版</a>
+                        <a href="projects/RIDCP/index.html" target="_blank">Project</a>
+                        <a href="https://github.com/RQ-Wu/RIDCP" target="_blank">Code</a>
+                        <a href="bibs/RIDCP.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </li>
-        <li class="publication-item">
-          <img src="images/RAM/2_pipeline-1.png" alt="RAM" class="pub-thumbnail" />
-          <div>
-            <h3 class="pub-title">Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h3>
-            <div class="pub-authors">Chu-Jie Qin, Rui-Qi Wu, Zi-Kun Liu, Xin Lin, Chun-Le Guo, Hyun Hee Park, Chong-Yi Li</div>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2409.19403v1">PDF</a>
-              <a href="https://rq-wu.github.io/projects/RAM/index.html">Project</a>
-              <a href="https://github.com/Dragonisss/RAM">Code</a>
-              <a href="bibs/RAM.html">BibTex</a>
+
+            <!-- Underwater Ranker 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/URanker/main.png" alt="Underwater Ranker">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Underwater Ranker: Learn Which Is Better and How to Be Better</h3>
+                    <p class="pub-authors">Chun-Le Guo*, <strong>Rui-Qi Wu*</strong>, Xin Jin, Ling-Hao Han, Zhi Chai, Wei-Dong Zhang, Chong-Yi Li</p>
+                    <p class="pub-venue">AAAI 2023 <span style="color: var(--apple-red);">(Oral Presentation)</span>
+                        <img src="https://img.shields.io/github/stars/RQ-Wu/UnderwaterRanker?label=%F0%9F%8C%9F%20Star&color=blue" alt="Stars">
+                        <img src="https://img.shields.io/github/forks/RQ-Wu/UnderwaterRanker?label=%F0%9F%94%A7%20Fork&color=green" alt="Forks">
+                    </p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2208.06857" target="_blank">PDF</a>
+                        <a href="#">中文版</a>
+                        <a href="https://li-chongyi.github.io/URanker_files/" target="_blank">Project</a>
+                        <a href="https://github.com/RQ-Wu/UnderwaterRanker" target="_blank">Code</a>
+                        <a href="https://pan.baidu.com/s/1K29p3gJWYa1ZM0vMHqI4uA" target="_blank">Dataset (pwd:nuin)</a>
+                        <a href="bibs/underwater_ranker.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-    
-    <!-- Honors & Awards -->
-    <section class="section awards-section">
-      <div class="section-header">
-        <h2 class="section-title">Honors & Awards</h2>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🏆</div>
-        <div class="award-content">
-          <div class="award-title">National Scholarship, 2023</div>
-          <div class="award-description">Top 0.2% student in China</div>
-        </div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🥈</div>
-        <div class="award-content">
-          <div class="award-title">RAW Image Blind De-noising Competition</div>
-          <div class="award-description">Second Runner-up (Team Feedforward), Megcup 2022</div>
-        </div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🥉</div>
-        <div class="award-content">
-          <div class="award-title">Night Photography Rendering Challenge</div>
-          <div class="award-description">Second Runner-up (Team Feedback), CVPR Workshop 2022</div>
-        </div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🥉</div>
-        <div class="award-content">
-          <div class="award-title">Kaggle Cassava Leaf Disease Classification</div>
-          <div class="award-description">Bronze Medal (Top 7%, 256/3900)</div>
-        </div>
-      </div>
-    </section>
-  </div>
+
+            <!-- ICME 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/StereoSuperpixel/ICME.png" alt="Stereo Superpixel Segmentation">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Stereo Superpixel Segmentation Via Dual-Attention Fusion Networks</h3>
+                    <p class="pub-authors"><strong>Rui-Qi Wu</strong>, Ya-Juan Du, Hua Li, Yu-Cong Dai</p>
+                    <p class="pub-venue">ICME 2021 <span style="color: var(--apple-red);">(Oral Presentation)</span></p>
+                    <div class="pub-links">
+                        <a href="https://ieeexplore.ieee.org/abstract/document/9428302" target="_blank">PDF</a>
+                        <a href="bibs/ICME.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-category">Other publications</div>
+
+            <!-- RAM 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/RAM/2_pipeline-1.png" alt="RAM">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Restore Anything with Masks: Leveraging Mask Image Modeling for Blind All-in-One Image Restoration</h3>
+                    <p class="pub-authors">Chu-Jie Qin, <strong>Rui-Qi Wu</strong>, Zi-Kun Liu, Xin Lin, Chun-Le Guo, Hyun Hee Park, Chong-Yi Li</p>
+                    <p class="pub-venue">ECCV 2024
+                        <img src="https://img.shields.io/github/stars/Dragonisss/RAM?label=%F0%9F%8C%9F%20Star&color=blue" alt="Stars">
+                        <img src="https://img.shields.io/github/forks/Dragonisss/RAM?label=%F0%9F%94%A7%20Fork&color=green" alt="Forks">
+                    </p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2409.19403v1" target="_blank">PDF</a>
+                        <a href="https://rq-wu.github.io/projects/RAM/index.html" target="_blank">Project</a>
+                        <a href="https://github.com/Dragonisss/RAM" target="_blank">Code</a>
+                        <a href="#" target="_blank">BibTex</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YOLO-MS 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/YOLO-MS/YOLO-MS.png" alt="YOLO-MS">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">YOLO-MS: Rethinking Multi-Scale Representation Learning for Real-time Object Detection</h3>
+                    <p class="pub-authors">Yu-Ming Chen, Xin-Bin Yuan, <strong>Rui-Qi Wu</strong>, Jia-Bao Wang, Qi-Bin Hou, Ming-Ming Cheng</p>
+                    <p class="pub-venue">Arxiv Pre-print, 2023
+                        <img src="https://img.shields.io/github/stars/FishAndWasabi/YOLO-MS?label=%F0%9F%8C%9F%20Star&color=blue" alt="Stars">
+                        <img src="https://img.shields.io/github/forks/FishAndWasabi/YOLO-MS?label=%F0%9F%94%A7%20Fork&color=green" alt="Forks">
+                    </p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2308.05480" target="_blank">PDF</a>
+                        <a href="https://github.com/FishAndWasabi/YOLO-MS" target="_blank">Code</a>
+                        <a href="https://mp.weixin.qq.com/s/FfG9vNM_a2k_zflWfuimsw" target="_blank">AIWalker</a>
+                        <a href="bibs/YOLO-MS.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EORNet 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/EORNet/before.jpg" alt="EORNet">
+                    <img src="images/EORNet/ours.jpg" class="hover-image" alt="EORNet result">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Towards Extremely Overexposed Image Restoration</h3>
+                    <p class="pub-authors">Zheng-Peng Duan, Xin Jin, <strong>Rui-Qi Wu</strong>, Chun-Le Guo, Li Liu, Chong-Yi Li</p>
+                    <p class="pub-venue">Under Review</p>
+                    <div class="pub-links">
+                        <a href="#">PDF</a>
+                        <a href="#">Code</a>
+                        <a href="#">BibTex</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stereo Superpixel 扩展论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/StereoSuperpixel/extension.png" alt="Stereo Superpixel Extension">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Stereo Superpixel Segmentation Via Decoupled Dynamic Spatial-Embedding Fusion Network</h3>
+                    <p class="pub-authors">Hua Li*, Jian-Feng Liang*, <strong>Rui-Qi Wu</strong>, Run-Min Cong, Jun-Hui Wu, Sam Tak Wu Kwong</p>
+                    <p class="pub-venue">IEEE TMM, 2023 <span style="color: var(--apple-red);">(Extension from ICME2021)</span></p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2208.08145" target="_blank">PDF</a>
+                        <a href="#">Code</a>
+                        <a href="bibs/superpixel.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Harmonization 论文 -->
+            <div class="publication liquid-glass">
+                <span class="lg-specular-dot" aria-hidden="true"></span>
+                <div class="pub-image">
+                    <img src="images/harmonized/before.png" alt="Image Harmonization before">
+                    <img src="images/harmonized/after.png" class="hover-image" alt="Image Harmonization after">
+                </div>
+                <div class="pub-content">
+                    <h3 class="pub-title">Image Harmonization by Matching Regional References</h3>
+                    <p class="pub-authors">Zi-Yue Zhu, Zhao Zhang, Zheng Lin, <strong>Rui-Qi Wu</strong>, Zhi Chai, Chun-Le Guo</p>
+                    <p class="pub-venue">Arxiv Pre-print, 2021</p>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2204.04715" target="_blank">PDF</a>
+                        <a href="#">Code</a>
+                        <a href="bibs/harmonize.html" target="_blank">BibTex</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 荣誉奖项区域 -->
+        <section id="awards">
+            <h2 class="section-title">
+                <i class="fas fa-award"></i> Honors & Awards
+            </h2>
+            <ul class="awards-list">
+                <li>National Scholarship, 2023 (Top 0.2% student in China).</li>
+                <li>Second Runner-up (Team Feedforward) in <a href="https://studio.brainpp.com/competition/5?tab=rank" target="_blank">RAW Image Blind De-noising</a>.</li>
+                <li>Second Runner-up (Team Feedback) in <a href="https://nightimaging.org/final-leaderboard.html" target="_blank">Night Photography Rendering Challenge, CVPR Workshop 2022</a>.</li>
+                <li>Kaggle Bronze Medal (256 / 3900, Top 7%), <a href="https://www.kaggle.com/competitions/cassava-leaf-disease-classification" target="_blank">Cassava Leaf Disease Classification</a>.</li>
+            </ul>
+        </section>
+
+        <!-- 页脚区域 -->
+        <footer>
+            <div class="clustrmaps-widget">
+                <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=JPElC7CKF9eOZ1uV60wlNxD7SYWTT5UOyqvS06CiH3A"></script>
+            </div>
+            <p>&copy; Rui-Qi Wu | Last updated: Nov. 2022</p>
+        </footer>
+    </div>
+
+    <!-- SVG: 液体折射滤镜（全局定义，一次即可） -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <!-- 噪声 + 位移，模拟微小流动的折射 -->
+            <filter id="lg-distort">
+                <feTurbulence type="fractalNoise" baseFrequency="0.011 0.017" numOctaves="2" seed="9" result="noise">
+                    <!-- 让噪声缓慢流动 -->
+                    <animate attributeName="baseFrequency" values="0.010 0.016;0.013 0.020;0.010 0.016"
+                            dur="var(--lg-flow-speed)" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="var(--lg-distortion)" xChannelSelector="R" yChannelSelector="G"/>
+                <!-- 轻微模糊柔化位移边缘 -->
+                <feGaussianBlur stdDeviation="0.25"/>
+            </filter>
+        </defs>
+    </svg>
 </body>
 </html>
+    
