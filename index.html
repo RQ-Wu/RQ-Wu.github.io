@@ -224,24 +224,42 @@
         /* --- 新闻列表 (Recent News) --- */
         .news-list {
             list-style: none; 
-            padding-left: 30px;
+            padding-left: 0; /* 移除左侧默认内边距 */
+            overflow: hidden; /* 隐藏超出高度的内容，配合 max-height 实现动画 */
         }
 
         .news-list li {
-            margin-bottom: 10px;
             font-size: 15px;
             padding-left: 1.2em;
             text-indent: -1.2em;
+            /* 动画关键属性 */
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-bottom 0.5s ease-in-out;
+            max-height: 50px; /* 确保有足够的空间展示一行新闻，但不会太大 */
+            margin-bottom: 10px; /* 默认显示时的底部外边距 */
+        }
+
+        .news-list li:last-child {
+            margin-bottom: 0; /* 确保最后一个元素没有额外的margin */
         }
         
-        .news-list li::before {
+        /* 动画：折叠状态 */
+        .news-list li.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0; /* 折叠时移除外边距 */
+            padding-top: 0;
+            padding-bottom: 0;
+            pointer-events: none; /* 防止鼠标事件 */
+        }
+
+        .news-list li::before, .awards-list li::before {
             content: "\2022"; 
             color: var(--color-accent);
             font-weight: bold;
             display: inline-block; 
-            width: 1.2em;
+            width: 1.2em; /* 调整宽度以适配 text-indent */
         }
-
+        
         .news-date {
             color: var(--color-text-secondary);
             font-weight: 400;
@@ -407,19 +425,6 @@
             margin-bottom: 10px;
         }
         
-        /* 隐藏超出默认数量的列表项 */
-        .news-list li.hidden-news {
-            display: none;
-        }
-        
-        .news-list li::before, .awards-list li::before {
-            content: "\2022"; 
-            color: var(--color-accent);
-            font-weight: bold;
-            display: inline-block; 
-            width: 0.2em; /* 控制点本身占据的空间宽度 */
-        }
-
         /* 按钮基础样式 */
         .toggle-btn {
             display: block;
@@ -762,6 +767,7 @@
             <h2 class="section-title">
                 <i class="fas fa-sun"></i> Recent News
             </h2>
+            <!-- 为了让动画生效，news-list需要设置 overflow: hidden; -->
             <ul class="news-list" id="news-list">
                 <li><span class="news-date">[09/2025]</span> One paper is accepted by NeurIPS 2025.</li>
                 <li><span class="news-date">[08/2025]</span> I received the <span class="news-highlight">Meituan Talent Program Internship Offer</span> and started working as a <span class="news-highlight">Beidou Intern</span>.</li>   
@@ -915,7 +921,7 @@
             }
         }
 
-        // --- 3. 新闻折叠逻辑 ---
+        // --- 3. 新闻折叠逻辑 (已更新为动画版本) ---
         function initNewsToggle() {
             const newsList = document.getElementById('news-list');
             const toggleBtn = document.getElementById('toggle-news-btn');
@@ -931,9 +937,11 @@
                 return;
             }
 
-            // 1. 初始化：隐藏超过阈值的新闻项
+            // 1. 初始化：隐藏超过阈值的新闻项 (使用 'collapsed' 类配合 max-height 动画)
             for (let i = defaultVisibleCount; i < newsItems.length; i++) {
-                newsItems[i].classList.add('hidden-news');
+                // 移除原有的 .hidden-news 类 (如果有的话)
+                newsItems[i].classList.remove('hidden-news'); 
+                newsItems[i].classList.add('collapsed');
             }
 
             // 2. 移除按钮的 visibility: hidden，使其可见
@@ -944,8 +952,8 @@
                 const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
 
                 for (let i = defaultVisibleCount; i < newsItems.length; i++) {
-                    // 切换隐藏项的可见性
-                    newsItems[i].classList.toggle('hidden-news');
+                    // 切换折叠状态
+                    newsItems[i].classList.toggle('collapsed');
                 }
 
                 // 更新按钮状态和文本
@@ -963,7 +971,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderExperience(); 
             renderPublications();
-            initNewsToggle(); // <--- 新增调用
+            initNewsToggle(); 
         });
     </script>
 </body>
