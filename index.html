@@ -6,28 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rui-Qi Wu - Academic Portfolio</title>
     
-    <!-- 引入 Google Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <!-- 引入 Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- 核心变量与重置 --- */
+        /* --- Core Variables & Reset --- */
         :root {
-            /* 配色方案：现代学术蓝灰调 */
-            --primary-color: #2563eb;       /* 亮蓝，用于重要交互 */
-            --primary-dark: #1e40af;        /* 深蓝，用于Hover */
-            --accent-color: #0f172a;        /* 深色背景/标题 */
-            --text-main: #334155;           /* 正文灰 */
-            --text-light: #64748b;          /* 辅助灰 */
-            --bg-body: #f8fafc;             /* 极淡的灰蓝背景 */
-            --bg-card: #ffffff;             /* 卡片白 */
-            --highlight-red: #be123c;       /* 强调色（如 News） */
+            /* Light Mode (Default) */
+            --primary-color: #2563eb;       /* Bright Blue */
+            --primary-dark: #1e40af;        /* Darker Blue */
+            --accent-color: #0f172a;        /* Dark Heading */
+            --text-main: #334155;           /* Main Text */
+            --text-light: #64748b;          /* Light Text */
+            --bg-body: #f8fafc;             /* Light Page BG */
+            --bg-card: #ffffff;             /* White Card BG */
+            --bg-card-hover: #fafbfc;       /* Hover Card BG */
+            --bg-header-start: #f1f5f9;
+            --bg-header-end: #ffffff;
+            --border-color: #e2e8f0;        /* Light Border */
+            --border-color-hover: #cbd5e1;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --highlight-red: #be123c;
+            --timeline-line: #e2e8f0;
+            --btn-bg: #ffffff;
+            --btn-text: #334155;
             
-            /* 布局与效果 */
+            /* Layout & Effects */
             --max-width: 960px;
             --radius-sm: 6px;
             --radius-lg: 12px;
@@ -35,6 +44,27 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
+        }
+
+        /* --- Dark Mode Variables --- */
+        [data-theme="dark"] {
+            --primary-color: #60a5fa;       /* Lighter Blue for Dark Mode */
+            --primary-dark: #93c5fd;        /* Even lighter for hover */
+            --accent-color: #f1f5f9;        /* Light Heading */
+            --text-main: #e2e8f0;           /* Light Grey Text */
+            --text-light: #94a3b8;          /* Muted Grey Text */
+            --bg-body: #020617;             /* Very Dark Slate Page BG */
+            --bg-card: #1e293b;             /* Dark Slate Card BG */
+            --bg-card-hover: #334155;       /* Lighter Slate Hover */
+            --bg-header-start: #0f172a;     /* Header Gradient Start */
+            --bg-header-end: #1e293b;       /* Header Gradient End */
+            --border-color: #334155;        /* Dark Border */
+            --border-color-hover: #475569;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --highlight-red: #fb7185;       /* Lighter Red */
+            --timeline-line: #334155;
+            --btn-bg: #1e293b;
+            --btn-text: #e2e8f0;
         }
 
         * {
@@ -49,6 +79,7 @@
             color: var(--text-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         a {
@@ -57,24 +88,57 @@
             transition: var(--transition);
         }
 
-        /* --- 布局容器 --- */
+        /* --- Layout Container --- */
         .container {
             max-width: var(--max-width);
             margin: 40px auto;
             background-color: var(--bg-card);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden; /* 防止子元素溢出圆角 */
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
         }
 
-        /* --- 头部区域 (Header) --- */
+        /* --- Toggle Button --- */
+        .theme-switch-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .theme-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: rotate(15deg);
+        }
+
+        /* --- Header --- */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 60px 50px;
-            background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
-            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, var(--bg-header-start) 0%, var(--bg-header-end) 100%);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
         }
 
         .profile-content {
@@ -91,7 +155,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* 社交链接按钮化 */
+        /* Social Links */
         .social-links {
             display: flex;
             gap: 12px;
@@ -103,12 +167,12 @@
             display: inline-flex;
             align-items: center;
             padding: 6px 14px;
-            background-color: white;
-            border: 1px solid #cbd5e1;
+            background-color: var(--btn-bg);
+            border: 1px solid var(--border-color);
             border-radius: 50px;
             font-size: 13px;
             font-weight: 500;
-            color: var(--text-main);
+            color: var(--btn-text);
             transition: var(--transition);
         }
 
@@ -150,7 +214,7 @@
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid white;
+            border: 4px solid var(--bg-card);
             box-shadow: var(--shadow-md);
             transition: var(--transition);
         }
@@ -159,10 +223,10 @@
             transform: scale(1.02) rotate(2deg);
         }
 
-        /* --- 章节通用 --- */
+        /* --- Sections --- */
         section {
             padding: 50px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
         }
         
         section:last-child {
@@ -186,7 +250,7 @@
             opacity: 0.9;
         }
 
-        /* --- 实习经历 (Grid Layout) --- */
+        /* --- Experience (Grid Layout) --- */
         .experience-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -194,8 +258,8 @@
         }
 
         .exp-card {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--btn-bg);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 20px 15px;
             text-align: center;
@@ -208,7 +272,7 @@
         .exp-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
-            border-color: #cbd5e1;
+            border-color: var(--border-color-hover);
         }
 
         .exp-logo {
@@ -216,7 +280,7 @@
             height: 64px;
             margin-bottom: 15px;
             border-radius: 50%;
-            background: white;
+            background: white; /* Keep logos on white even in dark mode */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -247,12 +311,12 @@
         .exp-period {
             font-size: 12px;
             color: #94a3b8;
-            background: #f1f5f9;
+            background: var(--bg-header-start); /* Subtle contrast bg */
             padding: 2px 8px;
             border-radius: 10px;
         }
 
-        /* --- News (Timeline Style) --- */
+        /* --- News --- */
         .news-container {
             position: relative;
             padding-left: 20px;
@@ -261,7 +325,6 @@
         .news-list {
             list-style: none;
             position: relative;
-            /* 移除原本的 border-left，改用伪元素做时间轴 */
         }
         
         .news-list::before {
@@ -271,7 +334,7 @@
             top: 5px;
             bottom: 5px;
             width: 2px;
-            background-color: #e2e8f0;
+            background-color: var(--timeline-line);
             border-radius: 2px;
         }
 
@@ -292,7 +355,7 @@
             top: 7px;
             width: 10px;
             height: 10px;
-            background-color: white;
+            background-color: var(--bg-card);
             border: 2px solid var(--primary-color);
             border-radius: 50%;
             z-index: 1;
@@ -320,7 +383,10 @@
             border-radius: 4px;
         }
         
-        /* 折叠动画 */
+        [data-theme="dark"] .news-highlight {
+            background-color: rgba(251, 113, 133, 0.1);
+        }
+
         .news-item.collapsed {
             max-height: 0;
             opacity: 0;
@@ -329,7 +395,7 @@
             pointer-events: none;
         }
 
-        /* --- Publications (List Style) --- */
+        /* --- Publications --- */
         .pub-year-header {
             font-size: 20px;
             font-weight: 700;
@@ -350,8 +416,8 @@
         }
 
         .publication-card:hover {
-            background-color: #fafbfc;
-            border-color: #e2e8f0;
+            background-color: var(--bg-card-hover);
+            border-color: var(--border-color);
         }
 
         .pub-img-wrapper {
@@ -360,7 +426,7 @@
             position: relative;
             border-radius: var(--radius-sm);
             overflow: hidden;
-            border: 1px solid #f1f5f9;
+            border: 1px solid var(--border-color);
         }
 
         .pub-img-wrapper img {
@@ -436,7 +502,7 @@
             vertical-align: middle;
         }
 
-        /* 资源链接按钮组 */
+        /* Resource Links */
         .pub-links {
             display: flex;
             flex-wrap: wrap;
@@ -450,8 +516,8 @@
             font-size: 12px;
             font-weight: 600;
             color: var(--text-main);
-            background-color: white;
-            border: 1px solid #cbd5e1;
+            background-color: var(--btn-bg);
+            border: 1px solid var(--border-color);
             padding: 4px 10px;
             border-radius: 4px;
             transition: var(--transition);
@@ -460,7 +526,7 @@
         .resource-link i {
             margin-right: 5px;
             font-size: 11px;
-            color: #64748b;
+            color: var(--text-light);
         }
 
         .resource-link:hover {
@@ -481,7 +547,8 @@
         .awards-list li {
             padding: 10px 0 10px 25px;
             position: relative;
-            border-bottom: 1px dashed #f1f5f9;
+            border-bottom: 1px dashed var(--border-color);
+            color: var(--text-main);
         }
         
         .awards-list li:last-child {
@@ -498,13 +565,17 @@
             color: #fbbf24; /* Gold color */
             font-size: 14px;
         }
+        
+        .awards-list a {
+            color: var(--primary-color);
+        }
 
         /* --- Footer --- */
         footer {
             padding: 40px;
             text-align: center;
-            background-color: #f8fafc;
-            border-top: 1px solid #e2e8f0;
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
         }
         
         footer p {
@@ -513,7 +584,7 @@
             color: var(--text-light);
         }
 
-        /* --- 交互按钮 --- */
+        /* --- Toggle Btn (News) --- */
         .toggle-btn {
             margin: 20px auto 0;
             display: block;
@@ -532,12 +603,17 @@
             text-decoration: underline;
         }
 
-        /* --- 响应式设计 --- */
+        /* --- Responsive Design --- */
         @media (max-width: 768px) {
             header {
                 flex-direction: column-reverse;
                 text-align: center;
                 padding: 40px 20px;
+            }
+            
+            .theme-switch-wrapper {
+                top: 10px;
+                right: 10px;
             }
             
             .profile-content {
@@ -561,8 +637,8 @@
             .publication-card {
                 flex-direction: column;
                 padding: 15px;
-                background-color: #fafbfc; /* Mobile card bg */
-                border: 1px solid #f1f5f9;
+                background-color: var(--bg-header-start); /* Mobile card bg */
+                border: 1px solid var(--border-color);
             }
             
             .pub-img-wrapper {
@@ -583,8 +659,19 @@
             }
         }
     </style>
+    
+    <!-- Dark Mode Initial Check (Prevents Flash of Light Mode) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
 
-    <!-- 数据源：保持原有JSON结构不变 -->
+    <!-- Data Sources (Unchanged) -->
     <script id="experience-data" type="application/json">
     {
       "experiences": [
@@ -807,6 +894,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- Theme Toggle -->
+        <div class="theme-switch-wrapper">
+            <button class="theme-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
         <!-- HEADER -->
         <header>
             <div class="profile-content">
@@ -899,9 +993,6 @@
 
         <!-- FOOTER -->
         <footer>
-            <!-- <div style="margin-bottom: 15px;">
-                 <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=JPElC7CKF9eOZ1uV60wlNxD7SYWTT5UOyqvS06CiH3A"></script>
-            </div> -->
             <p>
                 &copy; 2025 Rui-Qi Wu. Designed with <i class="fas fa-heart" style="color: #e11d48;"></i>.
             </p>
@@ -913,8 +1004,34 @@
         const pubContainer = document.getElementById('publication-list-container');
         const expDataElement = document.getElementById('experience-data');
         const expContainer = document.getElementById('experience-list-container');
+        const toggleBtn = document.getElementById('theme-toggle');
+        const toggleIcon = toggleBtn.querySelector('i');
+        const html = document.documentElement;
 
-        // --- 1. Render Experience (New Grid Style) ---
+        // --- 0. Theme Toggle Logic ---
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            } else {
+                toggleIcon.classList.remove('fa-sun');
+                toggleIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Set initial icon based on what script in <head> did
+        updateIcon(html.getAttribute('data-theme'));
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        // --- 1. Render Experience (Grid Style) ---
         function renderExperience() {
             try {
                 const data = JSON.parse(expDataElement.textContent);
@@ -941,7 +1058,7 @@
             }
         }
 
-        // --- 2. Render Publications (New Card Style) ---
+        // --- 2. Render Publications (Card Style) ---
         function renderPublications() {
             try {
                 const data = JSON.parse(pubDataElement.textContent);
@@ -1006,8 +1123,8 @@
         // --- 3. News Toggle Logic ---
         function initNewsToggle() {
             const newsList = document.getElementById('news-list');
-            const toggleBtn = document.getElementById('toggle-news-btn');
-            if (!newsList || !toggleBtn) return;
+            const toggleNewsBtn = document.getElementById('toggle-news-btn'); // Renamed to avoid conflict
+            if (!newsList || !toggleNewsBtn) return;
 
             const items = newsList.querySelectorAll('.news-item');
             const limit = 5;
@@ -1018,11 +1135,11 @@
                     items[i].classList.add('collapsed');
                 }
             } else {
-                toggleBtn.style.display = 'none';
+                toggleNewsBtn.style.display = 'none';
             }
 
-            toggleBtn.addEventListener('click', () => {
-                const isExpanded = toggleBtn.getAttribute('data-expanded') === 'true';
+            toggleNewsBtn.addEventListener('click', () => {
+                const isExpanded = toggleNewsBtn.getAttribute('data-expanded') === 'true';
                 
                 for (let i = limit; i < items.length; i++) {
                     if (isExpanded) {
@@ -1033,11 +1150,11 @@
                 }
 
                 if (!isExpanded) {
-                    toggleBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
-                    toggleBtn.setAttribute('data-expanded', 'true');
+                    toggleNewsBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+                    toggleNewsBtn.setAttribute('data-expanded', 'true');
                 } else {
-                    toggleBtn.innerHTML = 'View More News <i class="fas fa-chevron-down"></i>';
-                    toggleBtn.setAttribute('data-expanded', 'false');
+                    toggleNewsBtn.innerHTML = 'View More News <i class="fas fa-chevron-down"></i>';
+                    toggleNewsBtn.setAttribute('data-expanded', 'false');
                 }
             });
         }
