@@ -5,503 +5,586 @@
     <meta name="author" content="Ruiqi Wu">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rui-Qi Wu - Academic Portfolio</title>
+    
+    <!-- 引入 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- 引入 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* 主色板：基于深色和中性色，突出专业感 */
+        /* --- 核心变量与重置 --- */
         :root {
-            --color-background: #ffffff; 
-            --color-surface: #f7f7f7;    
-            --color-text-primary: #1e1e1e; 
-            --color-text-secondary: #5f6368; 
-            --color-accent: #004d99; /* 深海军蓝/普鲁士蓝作为强调色 */
-            --color-highlight: #b30000; /* 红色用于重要/新闻高亮 */
+            /* 配色方案：现代学术蓝灰调 */
+            --primary-color: #2563eb;       /* 亮蓝，用于重要交互 */
+            --primary-dark: #1e40af;        /* 深蓝，用于Hover */
+            --accent-color: #0f172a;        /* 深色背景/标题 */
+            --text-main: #334155;           /* 正文灰 */
+            --text-light: #64748b;          /* 辅助灰 */
+            --bg-body: #f8fafc;             /* 极淡的灰蓝背景 */
+            --bg-card: #ffffff;             /* 卡片白 */
+            --highlight-red: #be123c;       /* 强调色（如 News） */
             
-            /* 几何与效果 */
-            --radius-default: 6px;
-            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.06);
-            --shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.1);
-            --transition-duration: 0.2s;
+            /* 布局与效果 */
+            --max-width: 960px;
+            --radius-sm: 6px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
         body {
-            background-color: var(--color-surface);
-            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
-            padding: 40px 0;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 容器样式：纯净、无阴影 */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--color-background);
-            border-radius: var(--radius-default);
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-        
         a {
-            color: var(--color-accent);
             text-decoration: none;
-            transition: color var(--transition-duration);
+            color: inherit;
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: #0077c2;
-            text-decoration: underline;
+        /* --- 布局容器 --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 40px auto;
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden; /* 防止子元素溢出圆角 */
         }
 
         /* --- 头部区域 (Header) --- */
         header {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
-            padding: 40px;
-            border-bottom: 1px solid var(--color-surface);
+            justify-content: space-between;
+            padding: 60px 50px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .profile-info {
+        .profile-content {
             flex: 1;
-            min-width: 300px;
-            padding-right: 30px;
+            padding-right: 40px;
         }
 
         .profile-name {
-            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            color: var(--color-text-primary);
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
-        .profile-name i {
-            margin-right: 12px;
-            color: var(--color-accent);
-            font-size: 32px;
-        }
-
+        /* 社交链接按钮化 */
         .social-links {
-            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .social-links a {
-            font-size: 14px;
-            margin-right: 15px;
-            color: var(--color-text-secondary);
-            display: inline-block;
-            padding: 3px 0;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-accent);
-            text-decoration: none;
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: var(--transition);
         }
 
-        .social-links i {
-            margin-right: 5px;
+        .social-btn i {
+            margin-right: 6px;
+            color: var(--primary-color);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
         }
 
         .profile-bio {
-            font-size: 15px;
-            color: var(--color-text-primary);
+            font-size: 16px;
+            color: var(--text-main);
             line-height: 1.8;
         }
 
+        .profile-bio a {
+            color: var(--primary-color);
+            font-weight: 500;
+            border-bottom: 1px dashed rgba(37, 99, 235, 0.3);
+        }
+        
+        .profile-bio a:hover {
+            border-bottom-style: solid;
+        }
+
+        .profile-photo-wrapper {
+            flex-shrink: 0;
+            position: relative;
+        }
+
         .profile-photo {
-            flex: 0 0 140px; 
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            overflow: hidden;
-            margin-left: auto;
-            border: 4px solid var(--color-background);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
+            border: 4px solid white;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.02) rotate(2deg);
         }
 
-        /* --- 章节通用样式 --- */
+        /* --- 章节通用 --- */
         section {
-            padding: 40px;
+            padding: 50px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        section:last-child {
+            border-bottom: none;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--color-accent); 
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--accent-color);
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
-            color: var(--color-accent);
+            position: relative;
         }
 
         .section-title i {
-            font-size: 30px;
-            margin-right: 15px;
-        }
-        
-        /* --- 实习经历 (Experience) 样式 --- */
-        #experience {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+            color: var(--primary-color);
+            margin-right: 12px;
+            font-size: 24px;
+            opacity: 0.9;
         }
 
-        .experience-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px; 
-            list-style: none;
-            padding: 0;
-            justify-content: space-around; /* 居中对齐 */
+        /* --- 实习经历 (Grid Layout) --- */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
         }
 
-        .experience-item {
+        .exp-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 20px 15px;
+            text-align: center;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            width: 150px; /* 略微增大宽度 */
-            transition: transform 0.2s, box-shadow 0.2s;
-            padding: 10px 0;
         }
 
-        .experience-item:hover {
-            transform: translateY(-3px); 
+        .exp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
         }
 
         .exp-logo {
-            width: 70px; 
-            height: 70px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 64px;
+            height: 64px;
             margin-bottom: 15px;
-            background-color: var(--color-background);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 5px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
         }
 
         .exp-logo img {
-            width: 90%; 
-            height: 90%;
-            object-fit: contain; 
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             border-radius: 50%;
         }
 
         .exp-company {
-            font-size: 16px;
             font-weight: 600;
-            color: var(--color-text-primary);
+            color: var(--accent-color);
+            font-size: 15px;
             margin-bottom: 4px;
         }
 
         .exp-title {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            margin-bottom: 2px;
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 4px;
         }
-
+        
         .exp-period {
             font-size: 12px;
-            color: var(--color-text-secondary);
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 10px;
         }
 
-        /* --- 新闻列表 (Recent News) --- */
+        /* --- News (Timeline Style) --- */
+        .news-container {
+            position: relative;
+            padding-left: 20px;
+        }
+        
         .news-list {
-            list-style: none; 
-            padding-left: 0; /* 移除左侧默认内边距 */
-            overflow: hidden; /* 隐藏超出高度的内容，配合 max-height 实现动画 */
+            list-style: none;
+            position: relative;
+            /* 移除原本的 border-left，改用伪元素做时间轴 */
+        }
+        
+        .news-list::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background-color: #e2e8f0;
+            border-radius: 2px;
         }
 
-        .news-list li {
+        .news-item {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 18px;
             font-size: 15px;
-            padding-left: 1.2em;
-            text-indent: -1.2em;
-            /* 动画关键属性 */
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-bottom 0.5s ease-in-out;
-            max-height: 50px; /* 确保有足够的空间展示一行新闻，但不会太大 */
-            margin-bottom: 10px; /* 默认显示时的底部外边距 */
-        }
-
-        .news-list li:last-child {
-            margin-bottom: 0; /* 确保最后一个元素没有额外的margin */
+            color: var(--text-main);
+            transition: max-height 0.5s ease, opacity 0.5s ease, margin-bottom 0.5s ease;
         }
         
-        /* 动画：折叠状态 */
-        .news-list li.collapsed {
-            max-height: 0;
-            opacity: 0;
-            margin-bottom: 0; /* 折叠时移除外边距 */
-            padding-top: 0;
-            padding-bottom: 0;
-            pointer-events: none; /* 防止鼠标事件 */
+        /* Timeline Dot */
+        .news-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 7px;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
         }
 
-        .news-list li::before, .awards-list li::before {
-            content: "\2022"; 
-            color: var(--color-accent);
-            font-weight: bold;
-            display: inline-block; 
-            width: 1.2em; /* 调整宽度以适配 text-indent */
-        }
-        
         .news-date {
-            color: var(--color-text-secondary);
-            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
             margin-right: 8px;
+            display: inline-block;
+            min-width: 80px;
+        }
+        
+        .news-content {
+            color: var(--text-light);
         }
 
         .news-highlight {
-            color: var(--color-highlight); 
-            font-weight: 600;
+            color: var(--highlight-red);
+            font-weight: 500;
+            background-color: rgba(190, 18, 60, 0.05);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+        
+        /* 折叠动画 */
+        .news-item.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        /* --- 出版物 (Publications) --- */
-        .publication-note {
-            font-size: 14px;
-            margin-bottom: 20px;
-            color: var(--color-text-secondary);
-        }
-
-        .pub-category {
-            margin: 35px 0 15px 0;
+        /* --- Publications (List Style) --- */
+        .pub-year-header {
             font-size: 20px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            padding-bottom: 5px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 40px 0 20px 0;
+            padding-left: 15px;
+            border-left: 4px solid var(--primary-color);
         }
 
-        .publication {
+        .publication-card {
             display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
+            gap: 25px;
+            margin-bottom: 30px;
             padding: 20px;
-            background-color: var(--color-surface); 
-            border-radius: var(--radius-default);
-            transition: box-shadow var(--transition-duration);
+            border-radius: var(--radius-lg);
+            border: 1px solid transparent;
+            transition: var(--transition);
         }
 
-        .publication:hover {
-            box-shadow: var(--shadow-hover);
-            background-color: #f0f0f0; 
+        .publication-card:hover {
+            background-color: #fafbfc;
+            border-color: #e2e8f0;
         }
 
-        .pub-image {
-          flex: 0 0 200px;
-          height: 120px;
-          margin-right: 25px;
-          position: relative;
-          border-radius: var(--radius-default);
-          overflow: hidden;
-          box-shadow: var(--shadow-subtle);
-          transition: none;
+        .pub-img-wrapper {
+            flex: 0 0 240px;
+            height: 140px;
+            position: relative;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
         }
 
-        .pub-image img {
+        .pub-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
+            transition: transform 0.5s ease;
         }
         
-        .pub-image .hover-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity var(--transition-duration);
+        .pub-img-wrapper:hover img.main-img {
+            transform: scale(1.05);
         }
-
-        .pub-image:hover .hover-image {
+        
+        .pub-img-wrapper .hover-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: white;
+        }
+        
+        .pub-img-wrapper:hover .hover-img {
             opacity: 1;
         }
 
-        .pub-content {
+        .pub-details {
             flex: 1;
-            min-width: 350px;
         }
 
         .pub-title {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .pub-authors {
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: var(--color-text-secondary);
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 8px;
         }
         
         .pub-authors strong {
-            color: var(--color-text-primary); 
+            color: var(--text-main);
             font-weight: 600;
         }
 
         .pub-venue {
             font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
             margin-bottom: 12px;
-            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .venue-tag {
+            font-style: italic;
         }
         
         .pub-highlight {
-            color: var(--color-highlight); 
+            color: var(--highlight-red);
             font-weight: 600;
-            margin-left: 5px;
+            font-size: 13px;
         }
 
         .pub-badges img {
-            position: relative;
-            top: 3px;
-            height: 16px; 
-            margin-left: 8px;
-            filter: grayscale(10%); 
+            height: 18px;
+            vertical-align: middle;
         }
 
+        /* 资源链接按钮组 */
         .pub-links {
-            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
         }
 
-        .pub-links a {
-            font-size: 14px;
-            margin-right: 18px;
-            white-space: nowrap;
-            color: var(--color-accent);
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
         }
-
-        .pub-links i {
+        
+        .resource-link i {
             margin-right: 5px;
+            font-size: 11px;
+            color: #64748b;
         }
 
-        /* --- 荣誉奖项 (Honors & Awards) --- */
+        .resource-link:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .resource-link:hover i {
+            color: white;
+        }
+
+        /* --- Awards --- */
         .awards-list {
-            list-style: none; 
-            padding-left: 0;
+            list-style: none;
         }
 
         .awards-list li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            padding-left: 1.2em; 
-            text-indent: -1.2em;
+            padding: 10px 0 10px 25px;
+            position: relative;
+            border-bottom: 1px dashed #f1f5f9;
         }
         
+        .awards-list li:last-child {
+            border-bottom: none;
+        }
+
         .awards-list li::before {
-            content: "\2022"; 
-            color: var(--color-accent);
-            font-weight: bold;
-            display: inline-block; 
-            width: 1.2em;
+            content: "\f091"; /* FontAwesome trophy */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: #fbbf24; /* Gold color */
+            font-size: 14px;
         }
 
-        /* --- 页脚 (Footer) --- */
+        /* --- Footer --- */
         footer {
+            padding: 40px;
             text-align: center;
-            padding: 25px;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            margin-top: 20px;
-        }
-
-        .clustrmaps-widget {
-            display: inline-block;
-            margin-bottom: 10px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
         }
         
-        /* 按钮基础样式 */
-        .toggle-btn {
-            display: block;
-            width: 100%;
-            padding: 10px 15px;
+        footer p {
             margin-top: 15px;
-            background-color: transparent;
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* --- 交互按钮 --- */
+        .toggle-btn {
+            margin: 20px auto 0;
+            display: block;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
             cursor: pointer;
-            border-radius: var(--radius-default);
-            transition: background-color var(--transition-duration), transform var(--transition-duration);
+            padding: 10px 20px;
+            font-size: 14px;
+            transition: var(--transition);
         }
-
+        
         .toggle-btn:hover {
-            background-color: var(--color-accent);
-            color: var(--color-background);
+            color: var(--primary-dark);
+            text-decoration: underline;
         }
 
-        .toggle-btn i {
-            margin-right: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        /* 展开状态下的图标旋转 */
-        .toggle-btn[aria-expanded="true"] i {
-            transform: rotate(180deg);
-        }
-
-        /* 按钮加载完毕前的默认隐藏，防止闪烁 */
-        #toggle-news-btn {
-            visibility: hidden;
-        }
-
-        /* --- 响应式调整 --- */
+        /* --- 响应式设计 --- */
         @media (max-width: 768px) {
-            body { padding: 20px 0; }
             header {
-                flex-direction: column;
+                flex-direction: column-reverse;
                 text-align: center;
+                padding: 40px 20px;
+            }
+            
+            .profile-content {
+                padding-right: 0;
+                margin-top: 25px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+            }
+
+            section {
                 padding: 30px 20px;
             }
-            .profile-photo { margin: 20px auto 0; }
-            .profile-info { padding-right: 0; }
-            .profile-name { justify-content: center; }
-            .social-links { text-align: center; }
-            .profile-bio { text-align: left; }
-            section { padding: 20px; }
-            .section-title { margin-bottom: 20px; font-size: 20px; }
-            .publication { flex-direction: column; padding: 15px; }
-            .pub-image {
-                margin-right: 0;
-                margin-bottom: 15px;
-                width: 100%;
-                max-width: 300px;
-                margin-left: auto;
-                margin-right: auto;
-                height: 150px; 
-            }
-            .pub-content { min-width: unset; }
             
-            /* 移动端实习经历布局 */
-            .experience-list {
-                flex-wrap: nowrap;
-                overflow-x: auto; 
-                padding-bottom: 10px;
-                justify-content: flex-start;
+            .publication-card {
+                flex-direction: column;
+                padding: 15px;
+                background-color: #fafbfc; /* Mobile card bg */
+                border: 1px solid #f1f5f9;
             }
-            .experience-item {
-                flex-shrink: 0; 
-                width: 120px;
+            
+            .pub-img-wrapper {
+                width: 100%;
+                height: 160px;
+                flex: none;
+            }
+            
+            .news-item {
+                font-size: 14px;
+            }
+            
+            .news-date {
+                display: block;
+                margin-bottom: 4px;
+                color: var(--text-light);
+                font-size: 12px;
             }
         }
     </style>
-    
+
+    <!-- 数据源：保持原有JSON结构不变 -->
     <script id="experience-data" type="application/json">
     {
       "experiences": [
@@ -724,255 +807,245 @@
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <header>
-            <div class="profile-info">
-                <div class="profile-name">
-                    <i class="fas fa-user-circle"></i>
+            <div class="profile-content">
+                <h1 class="profile-name">
                     Rui-Qi Wu (武睿祺)
-                </div>
+                </h1>
                 <div class="social-links">
-                    <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" target="_blank">
-                        <i class="fab fa-google"></i> Google Scholar
+                    <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" target="_blank" class="social-btn">
+                        <i class="fab fa-google"></i> Scholar
                     </a>
-                    <a href="https://github.com/RQ-Wu" target="_blank">
+                    <a href="https://github.com/RQ-Wu" target="_blank" class="social-btn">
                         <i class="fab fa-github"></i> Github
                     </a>
-                    <a href="https://www.zhihu.com/people/hou-ban-lu-shui" target="_blank">
-                        <i class="fab fa-zhihu"></i> Zhihu (知乎)
+                    <a href="https://www.zhihu.com/people/hou-ban-lu-shui" target="_blank" class="social-btn">
+                        <i class="fab fa-zhihu"></i> Zhihu
                     </a>
                 </div>
-                <p class="profile-bio">
-                    Rui-Qi Wu (武睿祺) is currently a <strong>Ph.D. candidate</strong> at <a href="https://github.com/MCG-NKU" target="_blank">@MCG-NKU</a>, Nankai University. His primary research interests include <strong>AIGC (AI-Generated Content)</strong> and <strong>Embodied AI</strong>, with expertise in generative models and robust vision algorithms.
-                    <br>
-                    He is serving as a <strong>Beidou Research Intern</strong> at <a href="https://github.com/MeiGen-AI" target="_blank">@MeiGen-AI, Meituan</a>. Previously, he gained significant industry experience as an intern at <a href="https://github.com/HorizonRobotics" target="_blank">@HorizonRobotics</a>, <a href="https://github.com/megvii-research" target="_blank">@megvii-research</a>, and <a href="https://github.com/stepfun-ai" target="_blank">@StepFun</a>.
-                </p>
+                <div class="profile-bio">
+                    <p>
+                        I am currently a <strong>Ph.D. candidate</strong> at <a href="https://github.com/MCG-NKU" target="_blank">@MCG-NKU</a>, Nankai University. My primary research interests include <strong>AIGC (AI-Generated Content)</strong> and <strong>Embodied AI</strong>, with expertise in generative models and robust vision algorithms.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        Currently serving as a <strong>Beidou Research Intern</strong> at <a href="https://github.com/MeiGen-AI" target="_blank">@MeiGen-AI, Meituan</a>. Previously gained significant industry experience at <a href="https://github.com/HorizonRobotics" target="_blank">@HorizonRobotics</a>, <a href="https://github.com/megvii-research" target="_blank">@megvii-research</a>, and <a href="https://github.com/stepfun-ai" target="_blank">@StepFun</a>.
+                    </p>
+                </div>
             </div>
-            <div class="profile-photo">
-                <a href="images/my.jpg">
-                    <img src="images/my.jpg" alt="profile photo">
-                </a>
+            <div class="profile-photo-wrapper">
+                <img src="images/my.jpg" alt="Rui-Qi Wu" class="profile-photo" onerror="this.src='https://ui-avatars.com/api/?name=Rui+Qi&background=random&size=200'">
             </div>
         </header>
 
+        <!-- EXPERIENCE -->
         <section id="experience">
             <h2 class="section-title">
                 <i class="fas fa-briefcase"></i> Experience
             </h2>
             <div id="experience-list-container">
-                <p>Loading experience...</p> 
+                <!-- JS Will Populate This -->
             </div>
         </section>
 
+        <!-- NEWS -->
         <section id="news">
             <h2 class="section-title">
-                <i class="fas fa-sun"></i> Recent News
+                <i class="fas fa-bullhorn"></i> Recent News
             </h2>
-            <!-- 为了让动画生效，news-list需要设置 overflow: hidden; -->
-            <ul class="news-list" id="news-list">
-                <li><span class="news-date">[09/2025]</span> One paper is accepted by NeurIPS 2025.</li>
-                <li><span class="news-date">[08/2025]</span> I received the <span class="news-highlight">Meituan Talent Program Internship Offer</span> and started working as a <span class="news-highlight">Beidou Intern</span>.</li>   
-                <li><span class="news-date">[06/2025]</span> Our team released the code of <span class="news-highlight">EmbodiedGen</span><span class="pub-badges"><img src="https://img.shields.io/github/stars/HorizonRobotics/EmbodiedGen?label=%F0%9F%8C%9F%20Star&color=blue"></span>, which is a 3D world model.</li>   
-                <li><span class="news-date">[02/2025]</span> One paper is accepted by CVPR 2025.</li>   
-                <li><span class="news-date">[07/2024]</span> One paper is accepted by ECCV 2024.</li>   
-                <li><span class="news-date">[02/2024]</span> One paper is accepted by CVPR 2024.</li>
-                <li><span class="news-date">[11/2023]</span> I have served as a reviewer for CVPR 2024.</li>
-                <li><span class="news-date">[09/2023]</span> I have served as a reviewer for <span class="news-highlight">IEEE TPAMI</span> (IF: 24.314) and IEEE TCSVT (IF: 5.859).</li>
-                <li><span class="news-date">[07/2023]</span> I have served as a reviewer for AAAI 2024.</li>
-                <li><span class="news-date">[03/2023]</span> One paper was accepted by IEEE TMM.</li>
-                <li><span class="news-date">[02/2023]</span> One paper was accepted by CVPR 2023.</li>
-                <li><span class="news-date">[01/2023]</span> Our paper was awarded <span class="news-highlight">Oral Presentation</span> qualification by AAAI 2023.</li>
-                <li><span class="news-date">[12/2022]</span> I have served as a reviewer for Neurocomputing (IF: 5.719).</li>
-                <li><span class="news-date">[11/2022]</span> One paper was accepted by AAAI 2023.</li>
-                <li><span class="news-date">[04/2022]</span> Our team won the <span class="news-highlight">Third Place</span> in RAW Image Blind De-noising, Megcup 2022.</li>
-                <li><span class="news-date">[04/2022]</span> Our team won the <span class="news-highlight">Second Runner-up</span> in Night Photography Rendering Challenge, CVPRW 2022.</li>
-                <li><span class="news-date">[03/2021]</span> One paper is accepted by ICME 2021 as <span class="news-highlight">Oral Presentation</span>.</li>
-            </ul>
-            <button id="toggle-news-btn" class="toggle-btn" aria-expanded="false">
-                <i class="fas fa-chevron-down"></i> expand more
-            </button>
+            <div class="news-container">
+                <ul class="news-list" id="news-list">
+                    <li class="news-item"><span class="news-date">Sep 2025</span> <span class="news-content">One paper accepted by <strong>NeurIPS 2025</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Aug 2025</span> <span class="news-content">Received the <span class="news-highlight">Meituan Talent Program Internship Offer</span> and started as a Beidou Intern.</span></li>
+                    <li class="news-item"><span class="news-date">Jun 2025</span> <span class="news-content">Released code for <span class="news-highlight">EmbodiedGen</span>, a 3D world model.</span></li>
+                    <li class="news-item"><span class="news-date">Feb 2025</span> <span class="news-content">One paper accepted by <strong>CVPR 2025</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Jul 2024</span> <span class="news-content">One paper accepted by <strong>ECCV 2024</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Feb 2024</span> <span class="news-content">One paper accepted by <strong>CVPR 2024</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Nov 2023</span> <span class="news-content">Served as reviewer for CVPR 2024.</span></li>
+                    <li class="news-item"><span class="news-date">Sep 2023</span> <span class="news-content">Served as reviewer for <span class="news-highlight">IEEE TPAMI</span> and IEEE TCSVT.</span></li>
+                    <li class="news-item"><span class="news-date">Jul 2023</span> <span class="news-content">Served as reviewer for AAAI 2024.</span></li>
+                    <li class="news-item"><span class="news-date">Mar 2023</span> <span class="news-content">One paper accepted by <strong>IEEE TMM</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Feb 2023</span> <span class="news-content">One paper accepted by <strong>CVPR 2023</strong>.</span></li>
+                    <li class="news-item"><span class="news-date">Jan 2023</span> <span class="news-content">Paper awarded <span class="news-highlight">Oral Presentation</span> at AAAI 2023.</span></li>
+                </ul>
+                <button id="toggle-news-btn" class="toggle-btn">
+                    View More News <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
         </section>
 
+        <!-- PUBLICATIONS -->
         <section id="publications">
             <h2 class="section-title">
-                <i class="fas fa-book"></i> Publications
+                <i class="fas fa-book-open"></i> Publications
             </h2>
-            <p class="publication-note">( * denotes contribution equally )</p>
-            
             <div id="publication-list-container">
-                <p>Loading publications...</p> 
+                <!-- JS Will Populate This -->
             </div>
         </section>
 
+        <!-- AWARDS -->
         <section id="awards">
             <h2 class="section-title">
-                <i class="fas fa-award"></i> Honors & Awards
+                <i class="fas fa-trophy"></i> Honors & Awards
             </h2>
             <ul class="awards-list">
-                <li>National Scholarship, 2023 (Top 0.2% student in China).</li>
-                <li>Second Runner-up (Team Feedforward) in <a href="https://studio.brainpp.com/competition/5?tab=rank" target="_blank">RAW Image Blind De-noising</a>.</li>
-                <li>Second Runner-up (Team Feedback) in <a href="https://nightimaging.org/final-leaderboard.html" target="_blank">Night Photography Rendering Challenge, CVPR Workshop 2022</a>.</li>
-                <li>Kaggle Bronze Medal (256 / 3900, Top 7%), <a href="https://www.kaggle.com/competitions/cassava-leaf-disease-classification" target="_blank">Cassava Leaf Disease Classification</a>.</li>
+                <li><strong>National Scholarship, 2023</strong> (Top 0.2% student in China).</li>
+                <li><strong>Second Runner-up</strong> (Team Feedforward) in <a href="#" style="color:var(--primary-color)">RAW Image Blind De-noising</a>.</li>
+                <li><strong>Second Runner-up</strong> (Team Feedback) in <a href="#" style="color:var(--primary-color)">Night Photography Rendering Challenge, CVPR Workshop 2022</a>.</li>
+                <li><strong>Kaggle Bronze Medal</strong> (Top 7%), Cassava Leaf Disease Classification.</li>
             </ul>
         </section>
 
+        <!-- FOOTER -->
         <footer>
-            <div class="clustrmaps-widget">
-                <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=JPElC7CKF9eOZ1uV60wlNxD7SYWTT5UOyqvS06CiH3A"></script>
+            <div style="margin-bottom: 15px;">
+                 <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=JPElC7CKF9eOZ1uV60wlNxD7SYWTT5UOyqvS06CiH3A"></script>
             </div>
-            <p>&copy; Rui-Qi Wu | Last updated: Dec. 2025</p>
+            <p>
+                &copy; 2025 Rui-Qi Wu. Designed with <i class="fas fa-heart" style="color: #e11d48;"></i>.
+            </p>
         </footer>
     </div>
 
     <script>
         const pubDataElement = document.getElementById('publication-data');
         const pubContainer = document.getElementById('publication-list-container');
-        
         const expDataElement = document.getElementById('experience-data');
         const expContainer = document.getElementById('experience-list-container');
-        
-        // --- 1. 渲染实习经历函数 ---
+
+        // --- 1. Render Experience (New Grid Style) ---
         function renderExperience() {
             try {
                 const data = JSON.parse(expDataElement.textContent);
-                
-                let expListHtml = '<ul class="experience-list">';
+                let html = '<div class="experience-grid">';
 
                 data.experiences.forEach(exp => {
-                    expListHtml += `
-                        <li class="experience-item">
+                    html += `
+                        <div class="exp-card">
                             <div class="exp-logo">
-                                <img src="${exp.logoUrl}" alt="${exp.company} Logo">
+                                <img src="${exp.logoUrl}" alt="${exp.company} Logo" onerror="this.src='https://ui-avatars.com/api/?name=${exp.company.substring(0,2)}&background=random'">
                             </div>
                             <div class="exp-company">${exp.company}</div>
                             <div class="exp-title">${exp.title}</div>
                             <div class="exp-period">${exp.period}</div>
-                        </li>
+                        </div>
                     `;
                 });
 
-                expListHtml += '</ul>';
-                expContainer.innerHTML = expListHtml;
+                html += '</div>';
+                expContainer.innerHTML = html;
 
             } catch (error) {
-                console.error("Error rendering experiences:", error);
-                expContainer.innerHTML = "<p style='color: var(--color-highlight);'>Error loading experiences. Please check the JSON data structure and image paths.</p>";
+                console.error("Experience Render Error", error);
             }
         }
 
-        // --- 2. 渲染出版物函数 ---
+        // --- 2. Render Publications (New Card Style) ---
         function renderPublications() {
             try {
                 const data = JSON.parse(pubDataElement.textContent);
                 let html = '';
 
                 data.categories.forEach(category => {
-                    // 渲染分类标题 (使用语义化 H3)
-                    html += `<h3 class="pub-category">${category.title}</h3>`;
+                    html += `<h3 class="pub-year-header">${category.title}</h3>`;
                     
                     category.pubs.forEach(pub => {
-                        // 1. 准备链接 HTML
+                        // Links as Badges
                         let linksHtml = pub.links.map(link => {
-                            const iconClass = link.icon || 'fa-solid fa-link'; 
+                            const iconClass = link.icon || 'fa-solid fa-link';
                             return `
-                                <a href="${link.url}" target="_blank">
+                                <a href="${link.url}" target="_blank" class="resource-link">
                                     <i class="fas ${iconClass}"></i> ${link.text}
                                 </a>
                             `;
                         }).join('');
 
-                        // 2. 准备徽章 HTML
+                        // Badges (Stars/Forks)
                         let badgesHtml = '';
                         if (pub.badge_stars || pub.badge_forks) {
                             badgesHtml = '<span class="pub-badges">';
-                            if (pub.badge_stars) badgesHtml += `<img src="${pub.badge_stars}" alt="Stars">`;
-                            if (pub.badge_forks) badgesHtml += `<img src="${pub.badge_forks}" alt="Forks">`;
+                            if (pub.badge_stars) badgesHtml += `<img src="${pub.badge_stars}" style="margin-right:4px;">`;
+                            if (pub.badge_forks) badgesHtml += `<img src="${pub.badge_forks}">`;
                             badgesHtml += '</span>';
                         }
                         
-                        // 3. 准备作者 HTML (替换 **粗体** 标记)
+                        // Authors highlight
                         const authorsHtml = pub.authors.join(', ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                         
-                        // 4. 准备图片 Hover 效果
-                        const hoverImage = pub.hoverImageUrl ? `<img src="${pub.hoverImageUrl}" class="hover-image" alt="${pub.title} result">` : '';
+                        // Image Hover Logic
+                        const hoverImage = pub.hoverImageUrl 
+                            ? `<img src="${pub.hoverImageUrl}" class="hover-img" alt="Result preview">` 
+                            : '';
 
-                        // 5. 渲染单个论文 Article
                         html += `
-                            <article class="publication" data-pub-id="${pub.id}">
-                                <div class="pub-image">
-                                    <img src="${pub.imageUrl}" alt="${pub.title} cover">
+                            <article class="publication-card">
+                                <div class="pub-img-wrapper">
+                                    <img src="${pub.imageUrl}" class="main-img" alt="${pub.title}" onerror="this.src='https://placehold.co/400x300?text=Paper+Image'">
                                     ${hoverImage}
                                 </div>
-                                <div class="pub-content">
+                                <div class="pub-details">
                                     <h4 class="pub-title">${pub.title}</h4>
                                     <p class="pub-authors">${authorsHtml}</p>
-                                    <p class="pub-venue">${pub.venue} ${badgesHtml}</p>
+                                    <div class="pub-venue">
+                                        <span class="venue-tag">${pub.venue}</span>
+                                        ${badgesHtml}
+                                    </div>
                                     <div class="pub-links">${linksHtml}</div>
                                 </div>
                             </article>
                         `;
                     });
                 });
-
-                // 6. 插入到 DOM 中
                 pubContainer.innerHTML = html;
-
             } catch (error) {
-                console.error("Error rendering publications:", error);
-                pubContainer.innerHTML = "<p style='color: var(--color-highlight);'>Error loading publications. Please check the JSON data structure.</p>";
+                console.error("Publication Render Error", error);
             }
         }
 
-        // --- 3. 新闻折叠逻辑 (已更新为动画版本) ---
+        // --- 3. News Toggle Logic ---
         function initNewsToggle() {
             const newsList = document.getElementById('news-list');
             const toggleBtn = document.getElementById('toggle-news-btn');
-            
             if (!newsList || !toggleBtn) return;
 
-            const newsItems = newsList.getElementsByTagName('li');
-            const defaultVisibleCount = 5; // 默认显示 5 条新闻
-            
-            // 只有新闻总数大于默认显示数时才启用折叠功能
-            if (newsItems.length <= defaultVisibleCount) {
+            const items = newsList.querySelectorAll('.news-item');
+            const limit = 5;
+
+            // Initial hide
+            if (items.length > limit) {
+                for (let i = limit; i < items.length; i++) {
+                    items[i].classList.add('collapsed');
+                }
+            } else {
                 toggleBtn.style.display = 'none';
-                return;
             }
 
-            // 1. 初始化：隐藏超过阈值的新闻项 (使用 'collapsed' 类配合 max-height 动画)
-            for (let i = defaultVisibleCount; i < newsItems.length; i++) {
-                // 移除原有的 .hidden-news 类 (如果有的话)
-                newsItems[i].classList.remove('hidden-news'); 
-                newsItems[i].classList.add('collapsed');
-            }
-
-            // 2. 移除按钮的 visibility: hidden，使其可见
-            toggleBtn.style.visibility = 'visible';
-
-            // 3. 切换折叠状态的事件监听器
             toggleBtn.addEventListener('click', () => {
-                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-
-                for (let i = defaultVisibleCount; i < newsItems.length; i++) {
-                    // 切换折叠状态
-                    newsItems[i].classList.toggle('collapsed');
+                const isExpanded = toggleBtn.getAttribute('data-expanded') === 'true';
+                
+                for (let i = limit; i < items.length; i++) {
+                    if (isExpanded) {
+                        items[i].classList.add('collapsed');
+                    } else {
+                        items[i].classList.remove('collapsed');
+                    }
                 }
 
-                // 更新按钮状态和文本
-                if (isExpanded) {
-                    toggleBtn.setAttribute('aria-expanded', 'false');
-                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> expand more';
+                if (!isExpanded) {
+                    toggleBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+                    toggleBtn.setAttribute('data-expanded', 'true');
                 } else {
-                    toggleBtn.setAttribute('aria-expanded', 'true');
-                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> collapse';
+                    toggleBtn.innerHTML = 'View More News <i class="fas fa-chevron-down"></i>';
+                    toggleBtn.setAttribute('data-expanded', 'false');
                 }
             });
         }
-        
-        // 确保在页面加载完成后运行所有初始化逻辑
+
         document.addEventListener('DOMContentLoaded', () => {
-            renderExperience(); 
+            renderExperience();
             renderPublications();
-            initNewsToggle(); 
+            initNewsToggle();
         });
     </script>
 </body>
