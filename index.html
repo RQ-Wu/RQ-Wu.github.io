@@ -120,6 +120,25 @@
             to { transform: rotate(360deg); }
         }
 
+        /* --- Reading Progress Bar --- */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1001; /* Above navbar */
+        }
+        
+        #progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
         /* --- Sticky Navigation --- */
         .sticky-nav {
             position: sticky;
@@ -217,8 +236,34 @@
             font-size: 36px;
             font-weight: 700;
             color: var(--accent-color);
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             letter-spacing: -0.5px;
+        }
+
+        /* --- Typewriter Effect --- */
+        .typing-wrapper {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 20px;
+            background-color: var(--primary-color);
+            margin-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* Social Links */
@@ -1035,6 +1080,11 @@
         <div class="spinner"></div>
     </div>
 
+    <!-- Reading Progress Bar Container -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
     <!-- Sticky Navigation -->
     <nav class="sticky-nav">
         <a href="#header" class="nav-link active">About</a>
@@ -1063,6 +1113,13 @@
                 <h1 class="profile-name">
                     Rui-Qi Wu (武睿祺)
                 </h1>
+                
+                <!-- Typewriter Effect -->
+                <div class="typing-wrapper">
+                    <span id="typing-text"></span>
+                    <span class="cursor"></span>
+                </div>
+
                 <div class="social-links">
                     <a href="https://scholar.google.com/citations?user=orim0kUAAAAJ&hl=en" target="_blank" class="social-btn">
                         <i class="fab fa-google"></i> Scholar
@@ -1192,7 +1249,6 @@
                 let html = '<div class="experience-grid">';
 
                 data.experiences.forEach((exp, index) => {
-                    // Added stagger-item class for animation
                     html += `
                         <div class="exp-card stagger-item" style="transition-delay: ${index * 0.1}s">
                             <div class="exp-logo">
@@ -1237,7 +1293,6 @@
                         const authorsHtml = pub.authors.join(', ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                         const hoverImage = pub.hoverImageUrl ? `<img src="${pub.hoverImageUrl}" class="hover-img" alt="Result preview">` : '';
 
-                        // Added stagger-item class
                         html += `
                             <article class="publication-card stagger-item">
                                 <div class="pub-img-wrapper">
@@ -1299,7 +1354,45 @@
             });
         }
 
-        // --- 4. Animation & Scroll Logic ---
+        // --- 4. Typewriter Effect ---
+        function initTypewriter() {
+            const texts = ["Ph.D. Candidate @ Nankai University", "AIGC Researcher", "Embodied AI Enthusiast"];
+            const typeText = document.getElementById('typing-text');
+            if (!typeText) return;
+
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let delay = 100;
+
+            function type() {
+                const currentText = texts[textIndex];
+                
+                if (isDeleting) {
+                    typeText.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    delay = 50;
+                } else {
+                    typeText.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    delay = 100;
+                }
+
+                if (!isDeleting && charIndex === currentText.length) {
+                    isDeleting = true;
+                    delay = 2000; // Pause at end
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    delay = 500;
+                }
+
+                setTimeout(type, delay);
+            }
+            type();
+        }
+
+        // --- 5. Animation & Scroll Logic ---
         function initAnimations() {
             // Preloader fade out
             const preloader = document.getElementById('preloader');
@@ -1308,7 +1401,7 @@
                 preloader.style.visibility = 'hidden';
             });
 
-            // Scroll Reveal Observer
+            // Scroll Reveal Observer (FIXED: Toggle active class)
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: "0px 0px -50px 0px"
@@ -1318,20 +1411,31 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                    } else {
+                        // FIX: Remove active class when out of view to re-trigger animation
+                        entry.target.classList.remove('active');
                     }
                 });
             }, observerOptions);
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Back to Top & Active Nav Link
+            // Back to Top & Progress Bar
             const backToTopBtn = document.getElementById('back-to-top');
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section, header');
+            const progressBar = document.getElementById('progress-bar');
 
             window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                // Update Progress Bar
+                if(progressBar) progressBar.style.width = scrollPercent + '%';
+
                 // Back to Top visibility
-                if (window.scrollY > 300) {
+                if (scrollTop > 300) {
                     backToTopBtn.classList.add('show');
                 } else {
                     backToTopBtn.classList.remove('show');
@@ -1341,7 +1445,7 @@
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
+                    // const sectionHeight = section.clientHeight; // Unused
                     if (pageYOffset >= (sectionTop - 150)) {
                         current = section.getAttribute('id');
                     }
@@ -1364,6 +1468,7 @@
             renderExperience();
             renderPublications();
             initNewsToggle();
+            initTypewriter();
             initAnimations();
         });
     </script>
