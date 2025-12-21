@@ -35,6 +35,7 @@
             --timeline-line: #e2e8f0;
             --btn-bg: #ffffff;
             --btn-text: #334155;
+            --nav-bg: rgba(255, 255, 255, 0.85); /* Glassmorphism Nav */
             
             /* Layout & Effects */
             --max-width: 960px;
@@ -65,6 +66,11 @@
             --timeline-line: #334155;
             --btn-bg: #1e293b;
             --btn-text: #e2e8f0;
+            --nav-bg: rgba(30, 41, 59, 0.85);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -80,6 +86,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative; /* For scroll spy */
         }
 
         a {
@@ -88,10 +95,69 @@
             transition: var(--transition);
         }
 
+        /* --- Preloader --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-body);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Sticky Navigation --- */
+        .sticky-nav {
+            position: sticky;
+            top: 20px;
+            z-index: 900;
+            max-width: var(--max-width);
+            margin: 0 auto 20px auto;
+            margin-bottom: 40px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
         /* --- Layout Container --- */
         .container {
             max-width: var(--max-width);
-            margin: 40px auto;
+            margin: 0 auto 40px auto; /* Margin top removed for nav */
             background-color: var(--bg-card);
             border-radius: var(--radius-lg);
             box-shadow: 0 10px 15px -3px var(--shadow-color);
@@ -100,7 +166,7 @@
             position: relative;
         }
 
-        /* --- Toggle Button --- */
+        /* --- Toggle Button (Theme) --- */
         .theme-switch-wrapper {
             position: absolute;
             top: 20px;
@@ -223,7 +289,7 @@
             transform: scale(1.02) rotate(2deg);
         }
 
-        /* --- Sections --- */
+        /* --- Sections & Animations --- */
         section {
             padding: 50px;
             border-bottom: 1px solid var(--border-color);
@@ -232,6 +298,36 @@
         section:last-child {
             border-bottom: none;
         }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delay for Children */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .reveal.active .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Apply delays */
+        .reveal.active .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+        .reveal.active .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+        .reveal.active .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+        .reveal.active .stagger-item:nth-child(4) { transition-delay: 0.4s; }
 
         .section-title {
             font-family: 'Playfair Display', serif;
@@ -280,7 +376,7 @@
             height: 64px;
             margin-bottom: 15px;
             border-radius: 50%;
-            background: white; /* Keep logos on white even in dark mode */
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -311,7 +407,7 @@
         .exp-period {
             font-size: 12px;
             color: #94a3b8;
-            background: var(--bg-header-start); /* Subtle contrast bg */
+            background: var(--bg-header-start);
             padding: 2px 8px;
             border-radius: 10px;
         }
@@ -603,6 +699,39 @@
             text-decoration: underline;
         }
 
+        /* --- Back to Top --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            border: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: var(--primary-dark);
+        }
+
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             header {
@@ -614,6 +743,14 @@
             .theme-switch-wrapper {
                 top: 10px;
                 right: 10px;
+            }
+            
+            .sticky-nav {
+                top: 10px;
+                padding: 8px 15px;
+                gap: 5px;
+                font-size: 12px;
+                flex-wrap: wrap;
             }
             
             .profile-content {
@@ -660,7 +797,7 @@
         }
     </style>
     
-    <!-- Dark Mode Initial Check (Prevents Flash of Light Mode) -->
+    <!-- Dark Mode Initial Check -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -893,6 +1030,25 @@
     </script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav">
+        <a href="#header" class="nav-link active">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#news" class="nav-link">News</a>
+        <a href="#publications" class="nav-link">Publications</a>
+        <a href="#awards" class="nav-link">Awards</a>
+    </nav>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <div class="container">
         <!-- Theme Toggle -->
         <div class="theme-switch-wrapper">
@@ -902,8 +1058,8 @@
         </div>
 
         <!-- HEADER -->
-        <header>
-            <div class="profile-content">
+        <header id="header" class="reveal active">
+            <div class="profile-content stagger-item">
                 <h1 class="profile-name">
                     Rui-Qi Wu (武睿祺)
                 </h1>
@@ -927,13 +1083,13 @@
                     </p>
                 </div>
             </div>
-            <div class="profile-photo-wrapper">
+            <div class="profile-photo-wrapper stagger-item">
                 <img src="images/my.jpg" alt="Rui-Qi Wu" class="profile-photo" onerror="this.src='https://ui-avatars.com/api/?name=Rui+Qi&background=random&size=200'">
             </div>
         </header>
 
         <!-- EXPERIENCE -->
-        <section id="experience">
+        <section id="experience" class="reveal">
             <h2 class="section-title">
                 <i class="fas fa-briefcase"></i> Experience
             </h2>
@@ -943,24 +1099,24 @@
         </section>
 
         <!-- NEWS -->
-        <section id="news">
+        <section id="news" class="reveal">
             <h2 class="section-title">
                 <i class="fas fa-bullhorn"></i> Recent News
             </h2>
             <div class="news-container">
                 <ul class="news-list" id="news-list">
-                    <li class="news-item"><span class="news-date">Sep 2025</span> <span class="news-content">One paper accepted by <strong>NeurIPS 2025</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Aug 2025</span> <span class="news-content">Received the <span class="news-highlight">Meituan Talent Program Internship Offer</span> and started as a Beidou Intern.</span></li>
-                    <li class="news-item"><span class="news-date">Jun 2025</span> <span class="news-content">Released code for <span class="news-highlight">EmbodiedGen</span>, a 3D world model.</span></li>
-                    <li class="news-item"><span class="news-date">Feb 2025</span> <span class="news-content">One paper accepted by <strong>CVPR 2025</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Jul 2024</span> <span class="news-content">One paper accepted by <strong>ECCV 2024</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Feb 2024</span> <span class="news-content">One paper accepted by <strong>CVPR 2024</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Nov 2023</span> <span class="news-content">Served as reviewer for CVPR 2024.</span></li>
-                    <li class="news-item"><span class="news-date">Sep 2023</span> <span class="news-content">Served as reviewer for <span class="news-highlight">IEEE TPAMI</span> and IEEE TCSVT.</span></li>
-                    <li class="news-item"><span class="news-date">Jul 2023</span> <span class="news-content">Served as reviewer for AAAI 2024.</span></li>
-                    <li class="news-item"><span class="news-date">Mar 2023</span> <span class="news-content">One paper accepted by <strong>IEEE TMM</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Feb 2023</span> <span class="news-content">One paper accepted by <strong>CVPR 2023</strong>.</span></li>
-                    <li class="news-item"><span class="news-date">Jan 2023</span> <span class="news-content">Paper awarded <span class="news-highlight">Oral Presentation</span> at AAAI 2023.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Sep 2025</span> <span class="news-content">One paper accepted by <strong>NeurIPS 2025</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Aug 2025</span> <span class="news-content">Received the <span class="news-highlight">Meituan Talent Program Internship Offer</span> and started as a Beidou Intern.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Jun 2025</span> <span class="news-content">Released code for <span class="news-highlight">EmbodiedGen</span>, a 3D world model.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Feb 2025</span> <span class="news-content">One paper accepted by <strong>CVPR 2025</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Jul 2024</span> <span class="news-content">One paper accepted by <strong>ECCV 2024</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Feb 2024</span> <span class="news-content">One paper accepted by <strong>CVPR 2024</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Nov 2023</span> <span class="news-content">Served as reviewer for CVPR 2024.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Sep 2023</span> <span class="news-content">Served as reviewer for <span class="news-highlight">IEEE TPAMI</span> and IEEE TCSVT.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Jul 2023</span> <span class="news-content">Served as reviewer for AAAI 2024.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Mar 2023</span> <span class="news-content">One paper accepted by <strong>IEEE TMM</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Feb 2023</span> <span class="news-content">One paper accepted by <strong>CVPR 2023</strong>.</span></li>
+                    <li class="news-item stagger-item"><span class="news-date">Jan 2023</span> <span class="news-content">Paper awarded <span class="news-highlight">Oral Presentation</span> at AAAI 2023.</span></li>
                 </ul>
                 <button id="toggle-news-btn" class="toggle-btn">
                     View More News <i class="fas fa-chevron-down"></i>
@@ -969,7 +1125,7 @@
         </section>
 
         <!-- PUBLICATIONS -->
-        <section id="publications">
+        <section id="publications" class="reveal">
             <h2 class="section-title">
                 <i class="fas fa-book-open"></i> Publications
             </h2>
@@ -979,15 +1135,15 @@
         </section>
 
         <!-- AWARDS -->
-        <section id="awards">
+        <section id="awards" class="reveal">
             <h2 class="section-title">
                 <i class="fas fa-trophy"></i> Honors & Awards
             </h2>
             <ul class="awards-list">
-                <li><strong>National Scholarship, 2023</strong> (Top 0.2% student in China).</li>
-                <li><strong>Second Runner-up</strong> (Team Feedforward) in <a href="#" style="color:var(--primary-color)">RAW Image Blind De-noising</a>.</li>
-                <li><strong>Second Runner-up</strong> (Team Feedback) in <a href="#" style="color:var(--primary-color)">Night Photography Rendering Challenge, CVPR Workshop 2022</a>.</li>
-                <li><strong>Kaggle Bronze Medal</strong> (Top 7%), Cassava Leaf Disease Classification.</li>
+                <li class="stagger-item"><strong>National Scholarship, 2023</strong> (Top 0.2% student in China).</li>
+                <li class="stagger-item"><strong>Second Runner-up</strong> (Team Feedforward) in <a href="#" style="color:var(--primary-color)">RAW Image Blind De-noising</a>.</li>
+                <li class="stagger-item"><strong>Second Runner-up</strong> (Team Feedback) in <a href="#" style="color:var(--primary-color)">Night Photography Rendering Challenge, CVPR Workshop 2022</a>.</li>
+                <li class="stagger-item"><strong>Kaggle Bronze Medal</strong> (Top 7%), Cassava Leaf Disease Classification.</li>
             </ul>
         </section>
 
@@ -1019,27 +1175,26 @@
             }
         }
 
-        // Set initial icon based on what script in <head> did
         updateIcon(html.getAttribute('data-theme'));
 
         toggleBtn.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
         });
 
-        // --- 1. Render Experience (Grid Style) ---
+        // --- 1. Render Experience ---
         function renderExperience() {
             try {
                 const data = JSON.parse(expDataElement.textContent);
                 let html = '<div class="experience-grid">';
 
-                data.experiences.forEach(exp => {
+                data.experiences.forEach((exp, index) => {
+                    // Added stagger-item class for animation
                     html += `
-                        <div class="exp-card">
+                        <div class="exp-card stagger-item" style="transition-delay: ${index * 0.1}s">
                             <div class="exp-logo">
                                 <img src="${exp.logoUrl}" alt="${exp.company} Logo" onerror="this.src='https://ui-avatars.com/api/?name=${exp.company.substring(0,2)}&background=random'">
                             </div>
@@ -1052,33 +1207,25 @@
 
                 html += '</div>';
                 expContainer.innerHTML = html;
-
-            } catch (error) {
-                console.error("Experience Render Error", error);
-            }
+            } catch (error) { console.error(error); }
         }
 
-        // --- 2. Render Publications (Card Style) ---
+        // --- 2. Render Publications ---
         function renderPublications() {
             try {
                 const data = JSON.parse(pubDataElement.textContent);
                 let html = '';
 
                 data.categories.forEach(category => {
-                    html += `<h3 class="pub-year-header">${category.title}</h3>`;
+                    html += `<h3 class="pub-year-header stagger-item">${category.title}</h3>`;
                     
-                    category.pubs.forEach(pub => {
-                        // Links as Badges
-                        let linksHtml = pub.links.map(link => {
-                            const iconClass = link.icon || 'fa-solid fa-link';
-                            return `
-                                <a href="${link.url}" target="_blank" class="resource-link">
-                                    <i class="fas ${iconClass}"></i> ${link.text}
-                                </a>
-                            `;
-                        }).join('');
+                    category.pubs.forEach((pub, index) => {
+                        let linksHtml = pub.links.map(link => `
+                            <a href="${link.url}" target="_blank" class="resource-link">
+                                <i class="fas ${link.icon || 'fa-solid fa-link'}"></i> ${link.text}
+                            </a>
+                        `).join('');
 
-                        // Badges (Stars/Forks)
                         let badgesHtml = '';
                         if (pub.badge_stars || pub.badge_forks) {
                             badgesHtml = '<span class="pub-badges">';
@@ -1087,16 +1234,12 @@
                             badgesHtml += '</span>';
                         }
                         
-                        // Authors highlight
                         const authorsHtml = pub.authors.join(', ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                        
-                        // Image Hover Logic
-                        const hoverImage = pub.hoverImageUrl 
-                            ? `<img src="${pub.hoverImageUrl}" class="hover-img" alt="Result preview">` 
-                            : '';
+                        const hoverImage = pub.hoverImageUrl ? `<img src="${pub.hoverImageUrl}" class="hover-img" alt="Result preview">` : '';
 
+                        // Added stagger-item class
                         html += `
-                            <article class="publication-card">
+                            <article class="publication-card stagger-item">
                                 <div class="pub-img-wrapper">
                                     <img src="${pub.imageUrl}" class="main-img" alt="${pub.title}" onerror="this.src='https://placehold.co/400x300?text=Paper+Image'">
                                     ${hoverImage}
@@ -1115,21 +1258,18 @@
                     });
                 });
                 pubContainer.innerHTML = html;
-            } catch (error) {
-                console.error("Publication Render Error", error);
-            }
+            } catch (error) { console.error(error); }
         }
 
         // --- 3. News Toggle Logic ---
         function initNewsToggle() {
             const newsList = document.getElementById('news-list');
-            const toggleNewsBtn = document.getElementById('toggle-news-btn'); // Renamed to avoid conflict
+            const toggleNewsBtn = document.getElementById('toggle-news-btn');
             if (!newsList || !toggleNewsBtn) return;
 
             const items = newsList.querySelectorAll('.news-item');
             const limit = 5;
 
-            // Initial hide
             if (items.length > limit) {
                 for (let i = limit; i < items.length; i++) {
                     items[i].classList.add('collapsed');
@@ -1159,10 +1299,72 @@
             });
         }
 
+        // --- 4. Animation & Scroll Logic ---
+        function initAnimations() {
+            // Preloader fade out
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            });
+
+            // Scroll Reveal Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Back to Top & Active Nav Link
+            const backToTopBtn = document.getElementById('back-to-top');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section, header');
+
+            window.addEventListener('scroll', () => {
+                // Back to Top visibility
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+
+                // Scroll Spy for Nav
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderExperience();
             renderPublications();
             initNewsToggle();
+            initAnimations();
         });
     </script>
 </body>
