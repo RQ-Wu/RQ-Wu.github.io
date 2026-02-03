@@ -3,8 +3,8 @@
 <h3 align="center">Scaling Interactive World Models to 1000-Frame Horizons via Pose-Free Hierarchical Memory</h3>
 
 <p align="center">
-  <a href="http://arxiv.org/abs/2601.XXXXX"><img src="https://img.shields.io/badge/arXiv-2601.XXXXX-b31b1b.svg" alt="arXiv"></a>
-  <a href="https://rq-wu.github.io/projects/infinite-world"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
+  <a href="http://arxiv.org/abs/2602.02393"><img src="https://img.shields.io/badge/arXiv-2602.02393-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://rq-wu.github.io/projects/infinite_world"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
 </p>
 
 <p align="center">
@@ -41,9 +41,9 @@
 |:------|:----------:|:----------:|:-----------:|:-----------:|:-----------:|:-------:|:---------:|:-------:|:-----------:|
 | Hunyuan-GameCraft | 0.9855 | 0.9896 | 0.5380 | 0.6010 | 0.7785 | 2.67 | 2.49 | 2.56 | 1311 |
 | Matrix-Game 2.0 | 0.9788 | **1.0000** | 0.5267 | **0.7215** | 0.8068 | 2.98 | 2.91 | 1.78 | 1432 |
-| Yume 1.5 | 0.9861 | 0.9896 | **0.5840** | 0.6969 | **0.8141** | 2.43 | 1.91 | 2.47 | 1495 |
-| HY-World-1.5 | **0.9905** | **1.0000** | 0.5280 | 0.6611 | 0.7949 | 2.59 | 2.78 | **1.50** | 1542 |
-| **Infinite-World** | 0.9876 | **1.0000** | 0.5440 | 0.7159 | 0.8119 | **1.92** | **1.67** | 1.54 | **1719** |
+| Yume 1.5 | 0.9861 | 0.9896 | **0.5840** | <u>0.6969</u> | **0.8141** | <u>2.43</u> | <u>1.91</u> | 2.47 | 1495 |
+| HY-World-1.5 | **0.9905** | **1.0000** | 0.5280 | 0.6611 | 0.7949 | 2.59 | 2.78 | **1.50** | <u>1542</u> |
+| **Infinite-World** | <u>0.9876</u> | **1.0000** | <u>0.5440</u> | <u>0.7159</u> | <u>0.8119</u> | **1.92** | **1.67** | <u>1.54</u> | **1719** |
 
 ## TODO
 
